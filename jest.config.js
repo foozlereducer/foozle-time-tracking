@@ -19,4 +19,5 @@ module.exports = {
         tsconfig: "tsconfig.json",
       },
     },
+    testEnvironment: "jsdom",
   }

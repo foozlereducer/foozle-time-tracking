@@ -1,7 +1,9 @@
 
-export class ActoLocalStorage {
+class ActoLocalStorage {
   configObj:object;
   page:string;
+  localStorage:any;
+
   constructor(configObj:object, page:string) {
     this.get.bind(this)
     this.configObj = configObj;
@@ -31,3 +33,5 @@ export class ActoLocalStorage {
       return true;
   }
 }
+
+export default ActoLocalStorage;

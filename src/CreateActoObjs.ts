@@ -23,4 +23,4 @@ class CreateActoObjs {
   }
 }
 
-export default new CreateActoObjs;
+export default CreateActoObjs;
