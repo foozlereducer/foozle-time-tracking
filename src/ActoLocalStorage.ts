@@ -1,3 +1,4 @@
+import iLooseObject from "./iLooseObject";
 
 class ActoLocalStorage {
   configObj:object;
@@ -26,8 +27,28 @@ class ActoLocalStorage {
     return JSON.parse(p);
   }
 
+  getAll() {
+    const items:any = [];
+    let keys = Object.keys(localStorage);
+    let i = 0;
+    let key:any;
+    for (; key = keys[i]; i++) {
+      let obj:iLooseObject = {};
+      if (key.includes(this.prefix)) {
+        obj[key] =  localStorage.getItem(key);
+        items.push( obj );
+      }
+    }
+
+    return items;
+  }
+
   set(value:object) {
    localStorage.setItem(this.prefix + this.page , JSON.stringify(value));
+  }
+
+  setPage(pagename:string) {
+    this.page = pagename;
   }
 
   getPrefix() {

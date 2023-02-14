@@ -47,5 +47,28 @@ describe("Acto Local Storage", () => {
       let updatedPrefix = ALS.getPrefix();
       expect(updatedPrefix).toBe('steve-');
     });
+
+    test("should return all key / value pairs that start with 'acto-'", () => {
+      for(let i=0; i <= 10; i++) {
+        let currentPage = 'acto-https://testactoapp.com/fun' + i;
+        ALS.setPage(currentPage);
+        ALS.set({mock: i})
+      }
+      let objs = ALS.getAll()
+      expect(objs).toStrictEqual([
+        { 'acto-https://testactoapp.com/fun': '{"mock":0}' },
+        { 'acto-acto-https://testactoapp.com/fun0': '{"mock":0}' },
+        { 'acto-acto-https://testactoapp.com/fun1': '{"mock":1}' },
+        { 'acto-acto-https://testactoapp.com/fun2': '{"mock":2}' },
+        { 'acto-acto-https://testactoapp.com/fun3': '{"mock":3}' },
+        { 'acto-acto-https://testactoapp.com/fun4': '{"mock":4}' },
+        { 'acto-acto-https://testactoapp.com/fun5': '{"mock":5}' },
+        { 'acto-acto-https://testactoapp.com/fun6': '{"mock":6}' },
+        { 'acto-acto-https://testactoapp.com/fun7': '{"mock":7}' },
+        { 'acto-acto-https://testactoapp.com/fun8': '{"mock":8}' },
+        { 'acto-acto-https://testactoapp.com/fun9': '{"mock":9}' },
+        { 'acto-acto-https://testactoapp.com/fun10': '{"mock":10}' }
+      ]);
+    });
  
 });
