@@ -3,7 +3,7 @@ import iLooseObject from "./iLooseObject";
 class ActoTimers {
     i = 0;
     ALS:any;
-    key:string;
+    timingKey:string;
     timingObj:object;
     /**
      * Constructor 
@@ -16,26 +16,25 @@ class ActoTimers {
       this.setSeconds = this.setSeconds.bind(this)
       this.getSeconds = this.getSeconds.bind(this);
       this.ALS = ALS;
-
       this.timingObj = this.ALS.get();
-      this.key = this.ALS.getPage();
+      this.timingKey = this.ALS.getPrefix() + this.ALS.getPage();
     
       let currentSeconds =  this.getSeconds();
       if ('initialize' == currentSeconds) {
         this.setSeconds();
       } else {
-       this.initializeTimerConfig(0)
+       this.initializeTimerConfig()
       }
       this.i = i;
       
     }
-    
-    initializeTimerConfig(seconds:number) {
-      let obj = this.ALS.get();
-      let key = this.ALS.getPage();
-      obj[key] = seconds;
+
+    initializeTimerConfig() {
+      let obj:any = this.ALS.get();
       this.ALS.set(obj);
-      return this.ALS.get();
+      console.log('in init timer',obj)
+      console.log(obj)
+      return obj;
     }
     increment() {
         // this.i++

@@ -43,7 +43,7 @@ describe("Acto Local Storage", () => {
     test("should update the storage prefix from 'acto-' to 'steve-'", () => {
       let currentPrefix = ALS.getPrefix();
       expect(currentPrefix).toBe('acto-time-')
-      ALS.updatePrefix('steve-time-');
+      ALS.setPrefix('steve-time-');
       let updatedPrefix = ALS.getPrefix();
       expect(updatedPrefix).toBe('steve-time-');
     });

@@ -11,13 +11,16 @@ let MO:MergeObjs | null = null;
 
 beforeEach(() => {
     CPO = new CreatePageObj();
+    CPO.setObj();
     CVO = new CreateVideoObj();
+    CVO.setObj();
+    console.log(CVO.createObj())
     MO = new MergeObjs()
     let configObj = MO.execute(CPO.createObj(), CVO.createObj())
-    let page = 'https://testactoapp.com/fun'
+    let page = 'https://testactoapp.com/funster'
     ALS = new ActoLocalStorage();
-    ALS.init(configObj,page);
-   
+    ALS.init(configObj, page);
+    console.log('configobj in timer test', ALS.get())
     AT = new ActoTimers(ALS, 0)
   });
   
@@ -31,7 +34,11 @@ afterEach(() => {
 describe("Acto Timer", () => {
     test("should set a base time at 15 secound", () => {
         
-        expect(AT?.initializeTimerConfig(15)).toStrictEqual({"https://testactoapp.com/fun": 15});
+        let initConfig = AT?.initializeTimerConfig();
+        expect(initConfig).toStrictEqual({
+            seconds: 0,
+            video: { isplaying: false, volume: 0, progress: 0, videoname: '' }
+          });
     });
 
     test("should return 'acto-time-https://testactoapp.com/fun'", () => {

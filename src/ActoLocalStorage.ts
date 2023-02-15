@@ -56,7 +56,7 @@ class ActoLocalStorage {
     return this.prefix;
   }
 
-  updatePrefix(prefix:string) {
+  setPrefix(prefix:string) {
     this.prefix = prefix;
   }
   isJson(str:string) {

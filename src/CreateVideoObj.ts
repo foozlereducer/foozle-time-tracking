@@ -26,7 +26,7 @@ class CreateVideoObj implements iCreateObj{
                 volume: volume,
                 progress: progress,
                 videoname: videoname
-            };;
+            };
         }
       }
 }
