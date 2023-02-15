@@ -1,19 +1,21 @@
 import iLooseObject from "./iLooseObject";
 
 class ActoLocalStorage {
-  configObj:object;
-  page:string;
-  localStorage:any;
-  prefix:string;
+  configObj:any;
+  page:string| '';
+  prefix:string| '';
 
-  constructor(configObj:object, page:string, prefix:string='acto-') {
+  constructor() {
     this.get.bind(this)
+    this.configObj = {};
+    this.page = '';
+    this.prefix = '';
+  }
+
+  init(configObj:object, page:string, prefix:string='acto-time-') {
     this.configObj = configObj;
     this.page = page;
     this.prefix = prefix;
-  }
-
-  init() {
     localStorage.setItem(this.prefix + this.page , JSON.stringify(this.configObj));
   }
 
@@ -21,30 +23,29 @@ class ActoLocalStorage {
     let p:any = localStorage.getItem(this.prefix + this.page)
     
     if(null == p) {
-      this.init();
+      this.init(this.configObj,this.page, this.prefix);
     }
 
     return JSON.parse(p);
   }
 
+  getPage() {
+    return this.page;
+  }
+
   getAll() {
-    const items:any = [];
-    let keys = Object.keys(localStorage);
-    let i = 0;
-    let key:any;
-    for (; key = keys[i]; i++) {
-      let obj:iLooseObject = {};
+    const items:any = { ...localStorage };
+    let filtered:iLooseObject = {}
+    for(let key in items) {
       if (key.includes(this.prefix)) {
-        obj[key] =  localStorage.getItem(key);
-        items.push( obj );
+        filtered[key] = items[key];
       }
     }
-
-    return items;
+    return filtered;
   }
 
   set(value:object) {
-   localStorage.setItem(this.prefix + this.page , JSON.stringify(value));
+      localStorage.setItem(this.prefix + this.page , JSON.stringify(value));
   }
 
   setPage(pagename:string) {
