@@ -56,7 +56,6 @@ class ActoTimers {
     getStoredTime() {
       // Use storage to get the stored time object
       const storedTime = this.ALS.get();
-      console.log('getStoredSeconds', storedTime)
       // return the seconds attached as node on the config object
       return storedTime.seconds;
     }
