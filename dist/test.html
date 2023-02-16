@@ -1,0 +1,208 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A JavaScript Timer Prototype</title>
+  <meta name="description" content="A JavaScript Timer Prototype">
+  <meta name="author" content="Steve Browning">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <script src="ifvisible.js"></script>
+</head>
+
+<body>
+  <h1>Time Tracking Prototype</h1>
+  <div class="container-fluid">
+    <button id="previous">
+      Previous
+    </button>
+    <label for="pet-select">Choose a pet:</label>
+  
+    <select id="pet-select">
+      <option value="">--Please choose an option--</option>
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+      <option value="hamster">Hamster</option>
+      <option value="parrot">Parrot</option>
+      <option value="spider">Spider</option>
+      <option value="goldfish">Goldfish</option>
+    </select>
+  
+  <picture id="">
+    <img src="./imgs/dock-with-posts.jpeg" />
+  </picture>
+  <div id="Sailing Video"></div>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script type="module" src="./main.js"></script>
+
+<script type="module">
+    
+
+
+    throw new Error('stopping');
+
+    class ActoTimers {
+        i = 0;
+
+        constructor(timeStorageJson,i=0, key="actotime", page=page) {
+          // Bind `this` to only the class instance
+          this.increment = this.increment.bind(this);
+          this.setSeconds = this.setSeconds.bind(this)
+          this.getSeconds = this.getSeconds.bind(this);
+          this.timeStorageJson = timeStorageJson;
+          this.page = page;
+          let currentSeconds =  this.getSeconds();
+          if ('initialize' == currentSeconds) {
+            this.setSeconds();
+          } else {
+            this.timeStorageJson.page.seconds = currentSeconds;
+          }
+          this.key = key;
+          this.i = i;
+          
+        }
+
+        increment() {
+            this.i++
+            this.setCount(this.getSeconds())
+            this.setSeconds()
+            console.log(this.getSeconds());
+        }
+
+        setCount(counter=null) {
+          if (counter == null) {
+            this.i = counter;
+          }
+        }
+
+        setSeconds() {
+          if (!null == this.timeStorageJson.page) {
+            createPage(this.page)
+          }
+          this.timeStorageJson.page.seconds = this.i;
+            let storedObj = [];
+            storedObj[this.timeStorageJson.page] = JSON.stringify(this.timeStorageJson)
+            localStorage.setItem(this.key, storedObj)
+        }
+
+        getSeconds() {
+            let data = JSON.parse(localStorage.getItem(this.key))
+            if (null == data) {
+              return 'initialize'
+            }
+            let d = data[this.page]
+            let time = null;
+            if (!d) {
+              time = 0;
+            } else {
+              time = d.seconds;
+            }
+            return time;
+        }
+    }
+
+    const ATimer = new ActoTimers(timeStorageJson, i=0, "actotime", page );
+
+    function startTimerInterval(intervalTime=1000, counter=null) {
+      if (counter != null){
+        ATimer.setCount(ATimer.getSeconds);
+      } else {
+        ATimer.setCount(counter)
+      }
+      return setInterval(ATimer.increment, intervalTime);
+    }
+    let incrementId =  startTimerInterval(1000, ATimer.getSeconds());
+
+    let vimeovidid =  document.addEventListener('vimeo-vid', function(e){
+      console.log('Vimeo Video')
+    })
+
+    document.addEventListener('mousemove', function(e) {
+      let element = document.elementFromPoint(e.pageX, e.pageY);
+        if('IFRAME' == element.nodeName) {
+            if(null !==incrementId) {
+                clearInterval(incrementId)
+                incrementId = null;
+                
+                
+            }
+        } else {
+            let i = ATimer.getSeconds()
+            if(null == incrementId) {
+                ATimer.increment(String(i));
+                incrementId = setInterval(ATimer.increment, 1000);
+            }
+            console.log(element.nodeName); 
+        }
+    })
+
+    function convertSecondMicroSectondsToSeconds(val) {
+      let numArr = val.toString().split('.')
+      return Number( numArr[0])
+    }
+
+    var options = {
+      url: "https://vimeo.com/153641208",
+      width: 800
+    };
+
+    var videoPlayer = new Vimeo.Player('Sailing Video', options);
+
+    videoPlayer.setVolume(0.00);
+    const videoEvent = new CustomEvent('vimeo-vid', {
+      bubbles: true,
+      trusted: true,
+      detail: "vimeo-vid",
+    });
+        
+
+    var logPlayTime = function(data) {
+      vimeovidid.dispatchEvent(videoEvent);
+      console.log('vimeoid', vimeovidid)
+      if(incrementId) {
+        clearInterval(incrementId)
+      }
+      
+      if (0 == primeVideoStorage) {
+        localStorage.setItem('video-time', convertSecondMicroSectondsToSeconds(data.seconds))
+        primeVideoStorage++;
+      }
+      
+      if (Number(localStorage.getItem('video-time')) <= convertSecondMicroSectondsToSeconds(data.seconds)) {
+        nothing;
+      } else {
+        localStorage.setItem('video-time', convertSecondMicroSectondsToSeconds(data.seconds))
+        increment(getSeconds() + 1)
+      }
+      
+      console.log("Duration: " + data.duration + " -- Percent: " + data.percent + " -- Seconds: " + data.seconds);
+    };
+
+    videoPlayer.on('timeupdate', logPlayTime);
+        
+    ifvisible.on("blur", function(){
+
+      clearInterval(incrementId);
+      videoPlayer.getPaused().then(function(paused) {
+        if(paused){
+          videoObj = createVideoObj(false, videoPlayer.volume)
+        }else{
+          videoPlayer.pause();
+          videoObj = createVideoObj(true, videoPlayer.volume)
+        }
+      });
+
+    });
+
+    ifvisible.on("focus", function(){
+      // resume all animations
+      videoPlayer.play();
+      incrementId = startTimerInterval(1000, ATimer.getSeconds);
+    });
+  </script>
+</body>
+</html>
