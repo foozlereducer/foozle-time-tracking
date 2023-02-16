@@ -26,7 +26,6 @@ beforeEach(() => {
     let page = 'https://testactoapp.com/funster'
     PT = TM.request(PageTime);
     ALS.init(configObj, page);
-    console.log('configobj in timer test', ALS.get())
     AT = new ActoTimers(ALS, 0)
   });
   
