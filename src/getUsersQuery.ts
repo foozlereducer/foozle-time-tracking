@@ -8,7 +8,7 @@ interface User {
     deployedActionPacks: []
 }
 
-let mockUsers = [{name: "steve browning", phpne: 9054833790, deployedQctionPacks:[1,2,3,4]}]
+let mockUsers = [{name: "steve browning", phone: 9054833790, deployedQctionPacks:[1,2,3,4]}]
 
 interface RemindFilter {
     isNotStarted: () => {},

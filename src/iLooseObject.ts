@@ -1,3 +1,6 @@
+/**
+ * Loose Object Interface - any object that implements this will be able to add dynamic properties
+ */
 interface iLooseObject {
  [key: string]: any
 }

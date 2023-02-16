@@ -1,10 +1,8 @@
-import iLooseObject from "./iLooseObject";
-
 class ActoTimers {
     i = 0;
     ALS:any;
-    timingKey:string;
-    timingObj:object;
+    configObj:any;
+    TM:any;
     /**
      * Constructor 
      * @param ALS - an instance of thee ActoLocalStorage class
@@ -13,54 +11,61 @@ class ActoTimers {
     constructor(ALS:any,i=0) {
       // Bind `this` to only the class instance
       this.increment = this.increment.bind(this);
-      this.setSeconds = this.setSeconds.bind(this)
       this.getSeconds = this.getSeconds.bind(this);
+
       this.ALS = ALS;
-      this.timingObj = this.ALS.get();
-      this.timingKey = this.ALS.getPrefix() + this.ALS.getPage();
-    
-      let currentSeconds =  this.getSeconds();
-      if ('initialize' == currentSeconds) {
-        this.setSeconds();
-      } else {
-       this.initializeTimerConfig()
-      }
+      this.configObj = this.ALS.get();
       this.i = i;
-      
     }
-
-    initializeTimerConfig() {
-      let obj:any = this.ALS.get();
-      this.ALS.set(obj);
-      console.log('in init timer',obj)
-      console.log(obj)
-      return obj;
+    /**
+     * Increment Counter
+     * @param TimeStrategy - a concret time strategy that will manage their respective portions of the config object.
+     */
+    increment(TimeStrategy:any) {
+        this.i++
+        this.setStoredTime(TimeStrategy)
     }
-    increment() {
-        // this.i++
-        // this.setCount(this.getSeconds())
-        // this.setSeconds()
-        // console.log(this.getSeconds());
-    }
-
-    setCount(counter=0) {
+    /**
+     * Set Seconds 
+     * @param counter number - a number that represents the Timer's count
+     */
+    setSeconds(counter=0) {
       this.i = counter;
     }
-
-    setSeconds() {
-      // if (!null == this.timeStorageJson.page) {
-      //   createPage(this.page)
-      // }
-      // this.timeStorageJson.page.seconds = this.i;
-      //   let storedObj = [];
-      //   storedObj[this.timeStorageJson.page] = JSON.stringify(this.timeStorageJson)
-      //   localStorage.setItem(this.key, storedObj)
-    }
-
+     /**
+     * Get Seconds
+     * @returns number - the current ActoTimer count in seconds
+     */
     getSeconds() {
-        if (null == this.timingObj) {
-          return 'initialize'
-        }
+      return this.i;
+    }
+    /**
+     * Set Stored Time
+     * @param TimeStrategy - A concrete Time Strategy that will ultimately create a time updated config object
+     */
+    setStoredTime(TimeStrategy:any) {
+        // Use the time strategy to get an updated config object
+        this.configObj = TimeStrategy.doAction(this.configObj, this.i)
+        // Write the updated config object to storage
+        this.ALS.set(this.configObj)
+    }
+    /**
+     * Get Stored Time
+     * @returns number - the stored seconds
+     */
+    getStoredTime() {
+      // Use storage to get the stored time object
+      const storedTime = this.ALS.get();
+      console.log('getStoredSeconds', storedTime)
+      // return the seconds attached as node on the config object
+      return storedTime.seconds;
+    }
+    /**
+     * Get Config Object - the current state of it.
+     * @returns object - the config object literal
+     */
+    getconfigObj() {
+      return this.configObj;
     }
 }
 

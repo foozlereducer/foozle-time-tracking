@@ -3,11 +3,15 @@ import CreatePageObj from "./CreatePageObj";
 import CreateVideoObj from "./CreateVideoObj";
 import MergeObjs from "./MergeObjects";
 import ActoTimers from "./ActoTimer";
+import TimeManager from "./TimeManager";
+import PageTime from "./PageTime";
 let ALS:ActoLocalStorage | null = null;
 let AT:ActoTimers | null = null;
 let CPO:CreatePageObj | null = null;
 let CVO:CreateVideoObj | null = null
 let MO:MergeObjs | null = null;
+let TM:TimeManager | null = null;
+let PT:PageTime | null = null;
 
 beforeEach(() => {
     CPO = new CreatePageObj();
@@ -16,9 +20,11 @@ beforeEach(() => {
     CVO.setObj();
     console.log(CVO.createObj())
     MO = new MergeObjs()
+    ALS = new ActoLocalStorage();
+    TM = new TimeManager();
     let configObj = MO.execute(CPO.createObj(), CVO.createObj())
     let page = 'https://testactoapp.com/funster'
-    ALS = new ActoLocalStorage();
+    PT = TM.request(PageTime);
     ALS.init(configObj, page);
     console.log('configobj in timer test', ALS.get())
     AT = new ActoTimers(ALS, 0)
@@ -29,20 +35,21 @@ afterEach(() => {
     CPO = null;
     CVO = null;
     MO = null;
+    TM = null;
 });
 
 describe("Acto Timer", () => {
-    test("should set a base time at 15 secound", () => {
-        
-        let initConfig = AT?.initializeTimerConfig();
-        expect(initConfig).toStrictEqual({
-            seconds: 0,
-            video: { isplaying: false, volume: 0, progress: 0, videoname: '' }
-          });
+
+    test("Newly initialized ActoTimer should return 0 seconds", () => {
+      expect(AT?.getSeconds()).toBe(0);
+      expect(AT?.getStoredTime()).toBe(0);
     });
 
-    test("should return 'acto-time-https://testactoapp.com/fun'", () => {
-      expect(1).toBe(1);
+    test("should increment the seconds to 1 from 0", () => {
+      expect(AT?.getSeconds()).toBe(0);
+      AT?.increment(PT)
+      expect(AT?.getSeconds()).toBe(1);
+      expect(AT?.getStoredTime()).toBe(1);
     });
  
 });

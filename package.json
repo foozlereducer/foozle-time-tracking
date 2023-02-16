@@ -27,9 +27,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@augmentedjs/resource-manager": "^1.0.2",
     "ifvisible.js": "^1.0.6",
-    "timeme.js": "^2.1.0",
-    "tsyringe": "^4.7.0"
+    "timeme.js": "^2.1.0"
   }
 }
