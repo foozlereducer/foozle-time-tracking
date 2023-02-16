@@ -18,7 +18,6 @@ beforeEach(() => {
     CPO.setObj();
     CVO = new CreateVideoObj();
     CVO.setObj();
-    console.log(CVO.createObj())
     MO = new MergeObjs()
     ALS = new ActoLocalStorage();
     TM = new TimeManager();
@@ -50,5 +49,12 @@ describe("Acto Timer", () => {
       expect(AT?.getSeconds()).toBe(1);
       expect(AT?.getStoredTime()).toBe(1);
     });
- 
+
+    test("should set the timer seconds to 5", () => {
+      AT?.setSeconds(5)
+      AT?.setStoredTime(PT)
+      expect(AT?.getSeconds()).toBe(5);
+      expect(AT?.getStoredTime()).toBe(5);
+    });
+   
 });
