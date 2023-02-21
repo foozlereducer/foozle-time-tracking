@@ -101,19 +101,7 @@ class ActoLocalStorage {
   setPrefix(prefix:string) {
     this.prefix = prefix;
   }
-  /**
-   * Is JSON - utility function 
-   * @param str - to test if or if not is JSON
-   * @returns bool - true if it is JSON and false if it is Not JSON
-   */
-  isJson(str:string) {
-      try {
-          JSON.parse(str);
-      } catch (e) {
-          return false;
-      }
-      return true;
-  }
+  
 }
 
 export default ActoLocalStorage;

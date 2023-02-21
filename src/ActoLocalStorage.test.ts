@@ -34,12 +34,6 @@ describe("Acto Local Storage", () => {
       expect(JSON.stringify(ALS.get())).toBe(`{"mock":1}`);
     });
 
-    test("should return 'acto-https://testactoapp.com/fun'", () => {
-      let obj = ALS.get()
-      expect(ALS.isJson(obj)).toBe(false);
-      expect(ALS.isJson(JSON.stringify(obj))).toBe(true)
-    });
-
     test("should update the storage prefix from 'acto-' to 'steve-'", () => {
       let currentPrefix = ALS.getPrefix();
       expect(currentPrefix).toBe('acto-time-')

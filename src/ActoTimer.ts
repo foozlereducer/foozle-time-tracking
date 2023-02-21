@@ -1,3 +1,5 @@
+import ActoLocalStorage from "./ActoLocalStorage";
+import { isClass } from "./ActoUtils";
 class ActoTimers {
     i = 0;
     ALS:any;
@@ -12,7 +14,6 @@ class ActoTimers {
       // Bind `this` to only the class instance
       this.increment = this.increment.bind(this);
       this.getSeconds = this.getSeconds.bind(this);
-
       this.ALS = ALS;
       this.configObj = this.ALS.get();
       this.i = i;

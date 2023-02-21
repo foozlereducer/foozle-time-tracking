@@ -38,7 +38,6 @@ afterEach(() => {
 
 describe("Acto Timer", () => {
 
-
     test("Newly initialized ActoTimer getters should return 0 seconds", () => {
       expect(AT?.getSeconds()).toBe(0);
       expect(AT?.getStoredTime()).toBe(0);
