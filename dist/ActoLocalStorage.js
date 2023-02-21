@@ -7,9 +7,9 @@ class ActoLocalStorage {
      */
     configObj;
     /**
-     * Page name that is used as an unique part of the storage key
+     * Id that is used as an unique part of the storage key
      */
-    page;
+    uniqueId;
     /**
      * A prefix for the storage key for the config object
      */
@@ -20,29 +20,29 @@ class ActoLocalStorage {
     constructor() {
         this.get.bind(this);
         this.configObj = {};
-        this.page = '';
+        this.uniqueId = '';
         this.prefix = '';
     }
     /**
      * Init - initializes the storage object by writting to local storage
      * @param configObj - an exernally create config object
-     * @param page - the web page name - or unique name that forms part of the storage key
+     * @param uniqueId - the web page name - or unique name that forms part of the storage key
      * @param prefix - a prefix bound to the front of the storage key
      */
-    init(configObj, page, prefix = 'acto-time-') {
+    init(configObj, uniqueId, prefix = 'acto-time-') {
         this.configObj = configObj;
-        this.page = page;
+        this.uniqueId = uniqueId;
         this.prefix = prefix;
-        localStorage.setItem(this.prefix + this.page, JSON.stringify(this.configObj));
+        localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(this.configObj));
     }
     /**
      * Get - it retrieves the config object from storage
      * @returns object - a config object literal
      */
     get() {
-        let p = localStorage.getItem(this.prefix + this.page);
+        let p = localStorage.getItem(this.prefix + this.uniqueId);
         if (null == p) {
-            this.init(this.configObj, this.page, this.prefix);
+            this.init(this.configObj, this.uniqueId, this.prefix);
         }
         return JSON.parse(p);
     }
@@ -51,7 +51,7 @@ class ActoLocalStorage {
      * @returns string - the page or unique name for the storage key
      */
     getPage() {
-        return this.page;
+        return this.uniqueId;
     }
     /**
      * Get all of the acto storage keeys; filter all other storage key out
@@ -71,15 +71,15 @@ class ActoLocalStorage {
      * Set - set the local storage by componding a key of prefix and page and store the config object
      * @param value
      */
-    set(value) {
-        localStorage.setItem(this.prefix + this.page, JSON.stringify(value));
+    setStorageValues(value) {
+        localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
     }
     /**
      * Set Page - sets the unique page or name to be used as a storage key
      * @param pagename
      */
-    setPage(pagename) {
-        this.page = pagename;
+    setStorageKey(uniqueId) {
+        this.uniqueId = uniqueId;
     }
     /**
      * Get Prefix - get the prefix ~ uses appended to the storage key
@@ -94,20 +94,6 @@ class ActoLocalStorage {
      */
     setPrefix(prefix) {
         this.prefix = prefix;
-    }
-    /**
-     * Is JSON - utility function
-     * @param str - to test if or if not is JSON
-     * @returns bool - true if it is JSON and false if it is Not JSON
-     */
-    isJson(str) {
-        try {
-            JSON.parse(str);
-        }
-        catch (e) {
-            return false;
-        }
-        return true;
     }
 }
 export default ActoLocalStorage;

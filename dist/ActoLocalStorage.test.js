@@ -24,13 +24,8 @@ describe("Acto Local Storage", () => {
     test("should get the initialized storage object {mock:0},increment it {mock:1}", () => {
         let obj = ALS.get();
         obj.mock++;
-        ALS.set(obj);
+        ALS.setStorageValues(obj);
         expect(JSON.stringify(ALS.get())).toBe(`{"mock":1}`);
-    });
-    test("should return 'acto-https://testactoapp.com/fun'", () => {
-        let obj = ALS.get();
-        expect(ALS.isJson(obj)).toBe(false);
-        expect(ALS.isJson(JSON.stringify(obj))).toBe(true);
     });
     test("should update the storage prefix from 'acto-' to 'steve-'", () => {
         let currentPrefix = ALS.getPrefix();
@@ -42,8 +37,8 @@ describe("Acto Local Storage", () => {
     test("should return all key / value pairs that start with 'acto-'", () => {
         for (let i = 0; i <= 10; i++) {
             let currentPage = 'https://testactoapp.com/fun' + i;
-            ALS.setPage(currentPage);
-            ALS.set({ mock: i });
+            ALS.setStorageKey(currentPage);
+            ALS.setStorageValues({ mock: i });
         }
         let objs = ALS.getAll();
         expect(objs).toStrictEqual({
