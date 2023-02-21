@@ -37,6 +37,11 @@ afterEach(() => {
 });
 
 describe("Acto Timer", () => {
+    test("Should throw exception if an ActoLocalStorage instance is not passed", () => {  
+      expect(() => {
+        new ActoTimers({}, 0)
+      }).toThrow("The first parameter of ActoTimers constructor must be an instance of ActoLocalStorage");
+    });
 
     test("Newly initialized ActoTimer getters should return 0 seconds", () => {
       expect(AT?.getSeconds()).toBe(0);

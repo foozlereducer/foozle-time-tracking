@@ -1,5 +1,5 @@
 import ActoLocalStorage from "./ActoLocalStorage";
-import { isClass } from "./ActoUtils";
+
 class ActoTimers {
     i = 0;
     ALS:any;
@@ -11,6 +11,10 @@ class ActoTimers {
      * @param i - the start counting value
      */
     constructor(ALS:any,i=0) {
+      if( false == ALS instanceof ActoLocalStorage) {
+        throw new Error("The first parameter of ActoTimers constructor must be an instance of ActoLocalStorage");
+      }
+  
       // Bind `this` to only the class instance
       this.increment = this.increment.bind(this);
       this.getSeconds = this.getSeconds.bind(this);
@@ -48,7 +52,7 @@ class ActoTimers {
         // Use the time strategy to get an updated config object
         this.configObj = TimeStrategy.doAction(this.configObj, this.i)
         // Write the updated config object to storage
-        this.ALS.set(this.configObj)
+        this.ALS.setStorageValues(this.configObj)
     }
     /**
      * Get Stored Time

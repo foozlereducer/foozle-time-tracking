@@ -30,7 +30,7 @@ describe("Acto Local Storage", () => {
     test("should get the initialized storage object {mock:0},increment it {mock:1}", () => {
       let obj = ALS.get()
       obj.mock++;
-      ALS.set(obj)
+      ALS.setStorageValues(obj)
       expect(JSON.stringify(ALS.get())).toBe(`{"mock":1}`);
     });
 
@@ -45,8 +45,8 @@ describe("Acto Local Storage", () => {
     test("should return all key / value pairs that start with 'acto-'", () => {
       for(let i=0; i <= 10; i++) {
         let currentPage = 'https://testactoapp.com/fun' + i;
-        ALS.setPage(currentPage);
-        ALS.set({mock: i})
+        ALS.setStorageKey(currentPage);
+        ALS.setStorageValues({mock: i})
       }
       let objs = ALS.getAll()
       expect(objs).toStrictEqual({
