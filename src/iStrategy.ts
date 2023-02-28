@@ -1,8 +1,11 @@
 /**
  * Interface Strategy ~ will be inforce a concrete strategy to implement the 
- * doAction() method
- * @param timeObj optional - will hold the timing object literal where the object will be updated with the time
  */
 interface IStrategy {
-    doAction(timeObj?:any, counter?:number, isPlaying?:boolean, volume?:number, progress?:number): any;
+    /**
+     * Do Action - generic method that allows multiple parameter to be used that define this interface
+     * @param params - dynamic paramers 
+     * @param args - the parameters dynamic arguments
+     */
+    doAction(params: any, ...args: any[]): any;
 }

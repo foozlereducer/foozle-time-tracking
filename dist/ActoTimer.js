@@ -75,5 +75,11 @@ class ActoTimers {
     startTimer(intervalTime = 1000) {
         this.timerInterval = setInterval(this.increment, intervalTime);
     }
+    stopTimer() {
+        clearInterval(this.timerInterval);
+    }
+    getTimer() {
+        return this.timerInterval;
+    }
 }
 export default ActoTimers;
