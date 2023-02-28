@@ -37,75 +37,13 @@
   <div id="Sailing Video"></div>
 
   <script src="https://player.vimeo.com/api/player.js"></script>
-  <script type="module" src="./main.js"></script>
+  <script type="module" src="./actoTimermain.js"></script>
 
 <script type="module">
     
 
 
     throw new Error('stopping');
-
-    class ActoTimers {
-        i = 0;
-
-        constructor(timeStorageJson,i=0, key="actotime", page=page) {
-          // Bind `this` to only the class instance
-          this.increment = this.increment.bind(this);
-          this.setSeconds = this.setSeconds.bind(this)
-          this.getSeconds = this.getSeconds.bind(this);
-          this.timeStorageJson = timeStorageJson;
-          this.page = page;
-          let currentSeconds =  this.getSeconds();
-          if ('initialize' == currentSeconds) {
-            this.setSeconds();
-          } else {
-            this.timeStorageJson.page.seconds = currentSeconds;
-          }
-          this.key = key;
-          this.i = i;
-          
-        }
-
-        increment() {
-            this.i++
-            this.setCount(this.getSeconds())
-            this.setSeconds()
-            console.log(this.getSeconds());
-        }
-
-        setCount(counter=null) {
-          if (counter == null) {
-            this.i = counter;
-          }
-        }
-
-        setSeconds() {
-          if (!null == this.timeStorageJson.page) {
-            createPage(this.page)
-          }
-          this.timeStorageJson.page.seconds = this.i;
-            let storedObj = [];
-            storedObj[this.timeStorageJson.page] = JSON.stringify(this.timeStorageJson)
-            localStorage.setItem(this.key, storedObj)
-        }
-
-        getSeconds() {
-            let data = JSON.parse(localStorage.getItem(this.key))
-            if (null == data) {
-              return 'initialize'
-            }
-            let d = data[this.page]
-            let time = null;
-            if (!d) {
-              time = 0;
-            } else {
-              time = d.seconds;
-            }
-            return time;
-        }
-    }
-
-    const ATimer = new ActoTimers(timeStorageJson, i=0, "actotime", page );
 
     function startTimerInterval(intervalTime=1000, counter=null) {
       if (counter != null){
@@ -160,7 +98,7 @@
     });
         
 
-    var logPlayTime = function(data) {
+    const logPlayTime = function(data) {
       vimeovidid.dispatchEvent(videoEvent);
       console.log('vimeoid', vimeovidid)
       if(incrementId) {

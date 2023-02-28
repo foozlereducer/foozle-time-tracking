@@ -1,7 +1,7 @@
 /**
- * TimeManager factory
+ * Configure Strategy factory
  */
-class TimeManager {
+class ConfigFactory {
     /**
      * Request - The request is handled by the class passed in; it creates an instance
      * @param strategy - a concrete stratey 
@@ -13,4 +13,4 @@ class TimeManager {
     }
 }
 
-export default TimeManager;
+export default ConfigFactory;

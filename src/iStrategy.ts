@@ -4,5 +4,5 @@
  * @param timeObj optional - will hold the timing object literal where the object will be updated with the time
  */
 interface IStrategy {
-    doAction(timeObj?:any, counter?:number): any;
+    doAction(timeObj?:any, counter?:number, isPlaying?:boolean, volume?:number, progress?:number): any;
 }

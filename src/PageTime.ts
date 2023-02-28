@@ -7,6 +7,7 @@ class PageTime implements IStrategy {
      * @param timeObj - as the time object literal.
      */
     doAction(timeObj:any, counter:number):any {
+        
         timeObj.seconds = counter;
         return timeObj
     }

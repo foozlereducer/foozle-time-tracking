@@ -5,14 +5,19 @@ class ActoTimers {
     ALS:any;
     configObj:any;
     TM:any;
+    timerInterval:any;
+    timeStratey:any;
     /**
      * Constructor 
      * @param ALS - an instance of thee ActoLocalStorage class
      * @param i - the start counting value
      */
     constructor(ALS:any,i=0) {
-      if( false == ALS instanceof ActoLocalStorage) {
+      if( false == ALS instanceof ActoLocalStorage ) {
         throw new Error("The first parameter of ActoTimers constructor must be an instance of ActoLocalStorage");
+      }
+      if( 'number' !== typeof i) {
+        i=0;
       }
   
       // Bind `this` to only the class instance
@@ -21,14 +26,23 @@ class ActoTimers {
       this.ALS = ALS;
       this.configObj = this.ALS.get();
       this.i = i;
+      this.timerInterval = null;
+      this.timeStratey = null;
+    }
+
+    setTimeStrategy(TimeStrategy:any) {
+      this.timeStratey = TimeStrategy;
     }
     /**
      * Increment Counter
      * @param TimeStrategy - a concret time strategy that will manage their respective portions of the config object.
      */
-    increment(TimeStrategy:any) {
+    increment() {
         this.i++
-        this.setStoredTime(TimeStrategy)
+        // Use the time strategy to get an updated config object
+        this.configObj = this.timeStratey.doAction(this.configObj, this.i)
+        // Write the updated config object to storage
+        this.ALS.setStorageValues(this.configObj)
     }
     /**
      * Set Seconds 
@@ -44,16 +58,7 @@ class ActoTimers {
     getSeconds() {
       return this.i;
     }
-    /**
-     * Set Stored Time
-     * @param TimeStrategy - A concrete Time Strategy that will ultimately create a time updated config object
-     */
-    setStoredTime(TimeStrategy:any) {
-        // Use the time strategy to get an updated config object
-        this.configObj = TimeStrategy.doAction(this.configObj, this.i)
-        // Write the updated config object to storage
-        this.ALS.setStorageValues(this.configObj)
-    }
+   
     /**
      * Get Stored Time
      * @returns number - the stored seconds
@@ -69,7 +74,11 @@ class ActoTimers {
      * @returns object - the config object literal
      */
     getconfigObj() {
-      return this.configObj;
+      return this.ALS.get();
+    }
+
+    startTimer(intervalTime=1000) {
+       this.timerInterval = setInterval(this.increment, intervalTime);
     }
 }
 
