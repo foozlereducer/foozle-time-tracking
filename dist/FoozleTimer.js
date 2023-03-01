@@ -1,18 +1,18 @@
 import ActoLocalStorage from "./FoozleLocalStorage";
 class ActoTimer {
     i = 0;
-    ALS;
+    FLS;
     configObj;
     TM;
     timerInterval;
     timeStratey;
     /**
      * Constructor
-     * @param ALS - an instance of thee ActoLocalStorage class
+     * @param FLS - an instance of thee ActoLocalStorage class
      * @param i - the start counting value
      */
-    constructor(ALS, i = 0) {
-        if (false == ALS instanceof ActoLocalStorage) {
+    constructor(FLS, i = 0) {
+        if (false == FLS instanceof ActoLocalStorage) {
             throw new Error("The first parameter of FoozleTimer constructor must be an instance of FoozleLocalStorage");
         }
         if ('number' !== typeof i) {
@@ -21,8 +21,8 @@ class ActoTimer {
         // Bind `this` to only the class instance
         this.increment = this.increment.bind(this);
         this.getSeconds = this.getSeconds.bind(this);
-        this.ALS = ALS;
-        this.configObj = this.ALS.get();
+        this.FLS = FLS;
+        this.configObj = this.FLS.get();
         this.i = i;
         this.timerInterval = null;
         this.timeStratey = null;
@@ -39,7 +39,7 @@ class ActoTimer {
         // Use the time strategy to get an updated config object
         this.configObj = this.timeStratey.doAction(this.configObj, this.i);
         // Write the updated config object to storage
-        this.ALS.setStorageValues(this.configObj);
+        this.FLS.setStorageValues(this.configObj);
     }
     /**
      * Set Seconds
@@ -61,7 +61,7 @@ class ActoTimer {
      */
     getStoredTime() {
         // Use storage to get the stored time object
-        const storedTime = this.ALS.get();
+        const storedTime = this.FLS.get();
         // return the seconds attached as node on the config object
         return storedTime.seconds;
     }
@@ -70,7 +70,7 @@ class ActoTimer {
      * @returns object - the config object literal
      */
     getconfigObj() {
-        return this.ALS.get();
+        return this.FLS.get();
     }
     startTimer(intervalTime = 1000) {
         this.timerInterval = setInterval(this.increment, intervalTime);
