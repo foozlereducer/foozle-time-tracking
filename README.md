@@ -9,4 +9,6 @@ About:
     <li>It will allow tracking of page and vimeo video playing</li>
 </ol>
 
+<hr/>
+
 <footer>&copy; Copyright 2023 Steve Browning</footer>
