@@ -22,8 +22,8 @@ class CreatePageObj {
      * @param key - a key that defines the top reference value of the Page's object literal
      * @param timerValue  - set the start timerValue for the Page Object
      */
-    setObj(key = "seconds", timerValue = 0) {
-        if ("seconds" == key) {
+    setObj(key = 'seconds', timerValue = 0) {
+        if ('seconds' === key) {
             this.pageObj.seconds = timerValue;
         }
         else {

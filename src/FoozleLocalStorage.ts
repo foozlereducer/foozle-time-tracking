@@ -1,4 +1,4 @@
-import iLooseObject from "./iLooseObject";
+import ILooseObject from './iLooseObject';
 
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
@@ -7,21 +7,21 @@ class FoozleLocalStorage {
   /**
    * Config Object - the full storage config object literal
    */
-  configObj:any;
+  configObj: any;
   /**
    * Id that is used as an unique part of the storage key
    */
-  uniqueId:string| '';
+  uniqueId: string | '';
   /**
    * A prefix for the storage key for the config object
    */
-  prefix:string| '';
+  prefix: string | '';
 
   /**
    * Constructor - binds methods and intilizes the properties
    */
   constructor() {
-    this.get.bind(this)
+    this.get.bind(this);
     this.configObj = {};
     this.uniqueId = '';
     this.prefix = '';
@@ -32,21 +32,21 @@ class FoozleLocalStorage {
    * @param uniqueId - the web page name - or unique name that forms part of the storage key
    * @param prefix - a prefix bound to the front of the storage key
    */
-  init(configObj:object, uniqueId:string, prefix:string='foozle-time-') {
+  init(configObj: object, uniqueId: string, prefix: string = 'foozle-time-') {
     this.configObj = configObj;
     this.uniqueId = uniqueId;
     this.prefix = prefix;
-    localStorage.setItem(this.prefix + this.uniqueId , JSON.stringify(this.configObj));
+    localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(this.configObj));
   }
   /**
    * Get - it retrieves the config object from storage
    * @returns object - a config object literal
    */
   get() {
-    let p:any = localStorage.getItem(this.prefix + this.uniqueId)
-    
-    if(null == p) {
-      this.init(this.configObj,this.uniqueId, this.prefix);
+    const p: any = localStorage.getItem(this.prefix + this.uniqueId);
+
+    if (null == p) {
+      this.init(this.configObj, this.uniqueId, this.prefix);
     }
 
     return JSON.parse(p);
@@ -61,12 +61,12 @@ class FoozleLocalStorage {
 
   /**
    * Get all of the acto storage keeys; filter all other storage key out
-   * @returns 
+   * @returns
    */
   getAll() {
-    const items:any = { ...localStorage };
-    let filtered:iLooseObject = {}
-    for(let key in items) {
+    const items: any = { ...localStorage };
+    const filtered: ILooseObject = {};
+    for (const key in items) {
       if (key.includes(this.prefix)) {
         filtered[key] = items[key];
       }
@@ -75,16 +75,16 @@ class FoozleLocalStorage {
   }
   /**
    * Set - set the local storage by componding a key of prefix and page and store the config object
-   * @param value 
+   * @param value
    */
-  setStorageValues(value:object) {
-      localStorage.setItem(this.prefix + this.uniqueId , JSON.stringify(value));
+  setStorageValues(value: object) {
+    localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
   }
   /**
    * Set Page - sets the unique page or name to be used as a storage key
-   * @param pagename 
+   * @param pagename
    */
-  setStorageKey(uniqueId:string) {
+  setStorageKey(uniqueId: string) {
     this.uniqueId = uniqueId;
   }
   /**
@@ -95,13 +95,12 @@ class FoozleLocalStorage {
     return this.prefix;
   }
   /**
-   * Set Prefix 
-   * @param prefix 
+   * Set Prefix
+   * @param prefix
    */
-  setPrefix(prefix:string) {
+  setPrefix(prefix: string) {
     this.prefix = prefix;
   }
-  
 }
 
 export default FoozleLocalStorage;

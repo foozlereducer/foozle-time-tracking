@@ -1,8 +1,8 @@
 /**
  * Loose Object Interface - any object that implements this will be able to add dynamic properties
  */
-interface iLooseObject {
- [key: string]: any
+interface ILooseObject {
+  [key: string]: any;
 }
 
-export default iLooseObject;
+export default ILooseObject;

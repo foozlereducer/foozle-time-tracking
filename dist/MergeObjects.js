@@ -11,7 +11,7 @@ class MergeObjs {
     execute(aObj, bObjs) {
         return {
             ...aObj,
-            ...bObjs
+            ...bObjs,
         };
     }
 }

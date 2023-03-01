@@ -7,7 +7,7 @@ class VideoProps {
      * @param timeObj - as the time object literal.
      */
     doAction(timerObj, counter = 0, isplaying, volume, progress, videoname) {
-        if ('undefined' == timerObj.video) {
+        if ('undefined' === timerObj.video) {
             throw new Error('No video props found in the object');
         }
         timerObj.video.isplaying = isplaying;
