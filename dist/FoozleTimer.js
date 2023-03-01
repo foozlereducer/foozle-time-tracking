@@ -1,4 +1,4 @@
-import ActoLocalStorage from "./FoozleLocalStorage";
+import ActoLocalStorage from './FoozleLocalStorage';
 class ActoTimer {
     i = 0;
     FLS;
@@ -12,8 +12,8 @@ class ActoTimer {
      * @param i - the start counting value
      */
     constructor(FLS, i = 0) {
-        if (false == FLS instanceof ActoLocalStorage) {
-            throw new Error("The first parameter of FoozleTimer constructor must be an instance of FoozleLocalStorage");
+        if (false === FLS instanceof ActoLocalStorage) {
+            throw new Error('The first parameter of FoozleTimer constructor must be an instance of FoozleLocalStorage');
         }
         if ('number' !== typeof i) {
             i = 0;
@@ -49,9 +49,9 @@ class ActoTimer {
         this.i = counter;
     }
     /**
-    * Get Seconds
-    * @returns number - the current ActoTimer count in seconds
-    */
+     * Get Seconds
+     * @returns number - the current ActoTimer count in seconds
+     */
     getSeconds() {
         return this.i;
     }

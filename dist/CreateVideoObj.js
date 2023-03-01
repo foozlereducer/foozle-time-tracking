@@ -29,21 +29,22 @@ class CreateVideoObj {
      * @param videoname string - the video's name
      */
     setObj(isplaying = false, volume = 0, progress = 0, videoname = '') {
-        // Choice to see if the video object is topmost 
-        if ("video" == this.topKey) {
+        // Choice to see if the video object is topmost
+        if ('video' === this.topKey) {
             this.videoObj.video = {
-                isplaying: isplaying,
-                volume: volume,
-                progress: progress,
-                videoname: videoname
+                isplaying,
+                volume,
+                progress,
+                videoname,
             };
         }
-        else { // this references a video object withing an object literal.
+        else {
+            // this references a video object withing an object literal.
             this.videoObj[this.topKey] = {
-                isplaying: isplaying,
-                volume: volume,
-                progress: progress,
-                videoname: videoname
+                isplaying,
+                volume,
+                progress,
+                videoname,
             };
         }
     }

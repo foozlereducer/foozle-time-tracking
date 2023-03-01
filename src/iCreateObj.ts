@@ -1,8 +1,8 @@
 /**
  * Create Object Interface - this is used to standardize object literal creation
  */
-interface iCreateObj {
-    createObj():object;
+interface ICreateObj {
+  createObj(): object;
 }
 
-export default iCreateObj;
+export default ICreateObj;

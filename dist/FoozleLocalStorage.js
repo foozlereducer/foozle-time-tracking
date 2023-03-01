@@ -40,7 +40,7 @@ class FoozleLocalStorage {
      * @returns object - a config object literal
      */
     get() {
-        let p = localStorage.getItem(this.prefix + this.uniqueId);
+        const p = localStorage.getItem(this.prefix + this.uniqueId);
         if (null == p) {
             this.init(this.configObj, this.uniqueId, this.prefix);
         }
@@ -59,8 +59,8 @@ class FoozleLocalStorage {
      */
     getAll() {
         const items = { ...localStorage };
-        let filtered = {};
-        for (let key in items) {
+        const filtered = {};
+        for (const key in items) {
             if (key.includes(this.prefix)) {
                 filtered[key] = items[key];
             }
