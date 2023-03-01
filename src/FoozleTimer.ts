@@ -1,6 +1,6 @@
-import ActoLocalStorage from "./ActoLocalStorage";
+import ActoLocalStorage from "./FoozleLocalStorage";
 
-class ActoTimers {
+class ActoTimer {
     i = 0;
     ALS:any;
     configObj:any;
@@ -14,7 +14,7 @@ class ActoTimers {
      */
     constructor(ALS:any,i=0) {
       if( false == ALS instanceof ActoLocalStorage ) {
-        throw new Error("The first parameter of ActoTimers constructor must be an instance of ActoLocalStorage");
+        throw new Error("The first parameter of FoozleTimer constructor must be an instance of FoozleLocalStorage");
       }
       if( 'number' !== typeof i) {
         i=0;
@@ -90,4 +90,4 @@ class ActoTimers {
     }
 }
 
-export default ActoTimers;
+export default ActoTimer;

@@ -1,7 +1,7 @@
 /**
- * Acto Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
+ * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
  */
-class ActoLocalStorage {
+class FoozleLocalStorage {
     /**
      * Config Object - the full storage config object literal
      */
@@ -29,7 +29,7 @@ class ActoLocalStorage {
      * @param uniqueId - the web page name - or unique name that forms part of the storage key
      * @param prefix - a prefix bound to the front of the storage key
      */
-    init(configObj, uniqueId, prefix = 'acto-time-') {
+    init(configObj, uniqueId, prefix = 'foozle-time-') {
         this.configObj = configObj;
         this.uniqueId = uniqueId;
         this.prefix = prefix;
@@ -96,4 +96,4 @@ class ActoLocalStorage {
         this.prefix = prefix;
     }
 }
-export default ActoLocalStorage;
+export default FoozleLocalStorage;
