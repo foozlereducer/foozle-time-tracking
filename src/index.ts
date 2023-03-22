@@ -6,20 +6,24 @@ import FoozleLocalStorage from './FoozleLocalStorage';
 import CreatePageObj from './CreatePageObj';
 import CreateVideoObj from './CreateVideoObj';
 import MergeObjs from './MergeObjects';
-import Foozletimer from './FoozleTimer';
+import FoozleTimer from './FoozleTimer';
 import ConfigFactory from './ConfigFactory';
 import PageTime from './PageTime';
 import VideoProps from './VideoProps';
 import ICreateObj from './iCreateObj';
 import ILooseObject from './iLooseObject';
+import { FoozleEventsBinder } from './FoozleEventsBinder';
+import { FoozleTimeTrackEvent } from './FoozleTimeTrackEvent';
 
 export { FoozleLocalStorage }
 export { CreatePageObj }
 export { CreateVideoObj }
 export { MergeObjs }
-export { Foozletimer }
+export { FoozleTimer }
 export { ConfigFactory }
 export { PageTime }
 export { VideoProps }
 export { ICreateObj }
 export { ILooseObject }
+export { FoozleEventsBinder }
+export { FoozleTimeTrackEvent }

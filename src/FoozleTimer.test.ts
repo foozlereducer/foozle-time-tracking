@@ -1,14 +1,17 @@
-import FoozleLocalStorage from './FoozleLocalStorage';
-import CreatePageObj from './CreatePageObj';
-import CreateVideoObj from './CreateVideoObj';
-import MergeObjs from './MergeObjects';
-import FoozleTimers from './FoozleTimer';
-import ConfigFactory from './ConfigFactory';
-import PageTime from './PageTime';
-import VideoProps from './VideoProps';
+import { 
+  FoozleLocalStorage,
+  CreatePageObj,
+  CreateVideoObj,
+  MergeObjs,
+  FoozleTimer,
+  ConfigFactory,
+  PageTime,
+  VideoProps
+ } from './index';
+
 
 let FLS: FoozleLocalStorage | null = null;
-let FT: FoozleTimers | null = null;
+let FT: FoozleTimer | null = null;
 let CPO: CreatePageObj | null = null;
 let CVO: CreateVideoObj | null = null;
 let MO: MergeObjs | null = null;
@@ -30,7 +33,7 @@ beforeEach(() => {
   PT = CF.request(PageTime);
   VP = CF.request(VideoProps);
   FLS.init(configObj, page);
-  FT = new FoozleTimers(FLS, 0);
+  FT = new FoozleTimer(FLS, 0);
 });
 
 afterEach(() => {
@@ -44,7 +47,7 @@ afterEach(() => {
 describe('Acto Timer', () => {
   test('Should throw exception if an FoozleLocalStorage instance is not passed', () => {
     expect(() => {
-      const FTimer = new FoozleTimers({}, 0);
+      const FTimer = new FoozleTimer({}, 0);
     }).toThrow('The first parameter of FoozleTimer constructor must be an instance of FoozleLocalStorage');
   });
 
