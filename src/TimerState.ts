@@ -1,4 +1,4 @@
-import { IObserver, ISubject } from './index';
+import { IObserver, Observers,  ISubject } from './index';
 
 /**
  * The Subject interface declares a set of methods for managing subscribers.
@@ -8,7 +8,7 @@ export class TimerState implements ISubject {
   /**
    * Hold all attached Observers
    */
-  observers: Array<IObserver> = [];
+  observers: Observers = [];
 
   // Attach an observer to the subject.
   attach(observer: IObserver): void {

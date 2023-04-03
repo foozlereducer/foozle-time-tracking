@@ -15,7 +15,7 @@ import ILooseObject from './iLooseObject';
 import { FoozleEventsBinder } from './FoozleEventsBinder';
 import { FoozleTimeTrackEvent } from './FoozleTimeTrackEvent';
 import { ISubject } from './ISubject';
-import { IObserver } from './iObserver';
+import { IObserver, Observers } from './IObserver';
 
 export { FoozleLocalStorage };
 export { CreatePageObj };
@@ -31,3 +31,4 @@ export { FoozleEventsBinder };
 export { FoozleTimeTrackEvent };
 export { ISubject };
 export { IObserver };
+export { Observers };

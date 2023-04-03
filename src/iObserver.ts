@@ -7,3 +7,5 @@ export interface IObserver {
   // Receive update from subject.
   update(subject: ISubject): void;
 }
+
+export type Observers = IObserver[];
