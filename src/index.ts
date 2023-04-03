@@ -1,5 +1,5 @@
 /**
- * This is a central file wher all the modules get their imports from. Doing 
+ * This is a central file wher all the modules get their imports from. Doing
  * it this way the rolup more consistently will build true rather than assumed linking
  */
 import FoozleLocalStorage from './FoozleLocalStorage';
@@ -14,16 +14,20 @@ import ICreateObj from './iCreateObj';
 import ILooseObject from './iLooseObject';
 import { FoozleEventsBinder } from './FoozleEventsBinder';
 import { FoozleTimeTrackEvent } from './FoozleTimeTrackEvent';
+import { ISubject } from './ISubject';
+import { IObserver } from './iObserver';
 
-export { FoozleLocalStorage }
-export { CreatePageObj }
-export { CreateVideoObj }
-export { MergeObjs }
-export { FoozleTimer }
-export { ConfigFactory }
-export { PageTime }
-export { VideoProps }
-export { ICreateObj }
-export { ILooseObject }
-export { FoozleEventsBinder }
-export { FoozleTimeTrackEvent }
+export { FoozleLocalStorage };
+export { CreatePageObj };
+export { CreateVideoObj };
+export { MergeObjs };
+export { FoozleTimer };
+export { ConfigFactory };
+export { PageTime };
+export { VideoProps };
+export { ICreateObj };
+export { ILooseObject };
+export { FoozleEventsBinder };
+export { FoozleTimeTrackEvent };
+export { ISubject };
+export { IObserver };

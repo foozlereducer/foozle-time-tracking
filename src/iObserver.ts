@@ -1,3 +1,9 @@
+import { ISubject } from './index';
+
+/**
+ * The Observer interface declares the update method, used by subjects.
+ */
 export interface IObserver {
-    update(event:any):void
+  // Receive update from subject.
+  update(subject: ISubject): void;
 }

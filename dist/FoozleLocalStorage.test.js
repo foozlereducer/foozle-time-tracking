@@ -2,9 +2,9 @@ import FoozleLocalStorage from './FoozleLocalStorage';
 let FLS = null;
 beforeEach(() => {
     const configObj = { mock: 0 };
-    const page = 'https://testactoapp.com/fun';
+    const uniqueKey = 'https://testactoapp.com/fun';
     FLS = new FoozleLocalStorage();
-    FLS.init(configObj, page);
+    FLS.init(configObj, uniqueKey);
 });
 afterEach(() => {
     FLS = null;
@@ -13,9 +13,9 @@ describe('Acto Local Storage', () => {
     test("should set the storage key to 'steve-https://testactoapp.com/fun'", () => {
         const prefix = 'steve-';
         const configObj = { mock: 0 };
-        const page = 'https://testactoapp.com/fun';
+        const uniqueKey = 'https://testactoapp.com/fun';
         const AS = new FoozleLocalStorage();
-        AS.init(configObj, page, prefix);
+        AS.init(configObj, uniqueKey, prefix);
         expect(JSON.stringify(FLS.get())).toBe(`{"mock":0}`);
     });
     test("should return 'foozle-https://testactoapp.com/fun'", () => {

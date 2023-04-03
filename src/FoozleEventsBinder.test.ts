@@ -1,6 +1,6 @@
-import { FoozleEventsBinder, FoozleLocalStorage } from "./index";
+import { FoozleEventsBinder, FoozleLocalStorage } from './index';
 
-let FLS = new FoozleLocalStorage();
+const FLS = new FoozleLocalStorage();
 let FEB: any = null;
 
 beforeEach(() => {
@@ -13,13 +13,11 @@ afterEach(() => {
 
 describe('Create Acto Objs', () => {
   test('should set default bind element for events', () => {
-    const elements = FEB.getElements()
-    expect(elements).toStrictEqual("p, select, button");
+    const elements = FEB.getElements();
+    expect(elements).toStrictEqual('p, select, button');
   });
   test('should set default bind element for events', () => {
-    const binderStatus = FEB.runTimerBinders()
+    const binderStatus = FEB.runTimerBinders();
     expect(binderStatus).toStrictEqual(true);
   });
 });
-
-

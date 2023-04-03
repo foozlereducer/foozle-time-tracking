@@ -5,7 +5,7 @@ class ActoTimer {
   FLS: any;
   configObj: any;
   TM: any;
-  timerInterval:any;
+  timerInterval: any;
   timeStratey: any;
   /**
    * Constructor

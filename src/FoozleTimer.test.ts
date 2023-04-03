@@ -1,4 +1,4 @@
-import { 
+import {
   FoozleLocalStorage,
   CreatePageObj,
   CreateVideoObj,
@@ -6,9 +6,8 @@ import {
   FoozleTimer,
   ConfigFactory,
   PageTime,
-  VideoProps
- } from './index';
-
+  VideoProps,
+} from './index';
 
 let FLS: FoozleLocalStorage | null = null;
 let FT: FoozleTimer | null = null;
