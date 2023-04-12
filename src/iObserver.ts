@@ -8,4 +8,7 @@ export interface IObserver {
   update(subject: ISubject): void;
 }
 
+/**
+ * Objservers type that allows to type a value as an array or observers
+ */
 export type Observers = IObserver[];

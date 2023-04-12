@@ -91,7 +91,7 @@ describe('Acto Timer', () => {
   test('should show that Acto Storage and Acto Timer set and show the same video props ', () => {
     let configO = FLS?.get();
     configO = VP?.doAction(configO, 0, true, 30, 5.234, 'fun');
-    FLS?.setStorageValues(configO);
+    FLS?.setValue(configO);
     expect(FLS?.get()).toStrictEqual(FT?.getconfigObj());
     expect(FT?.getconfigObj()).toStrictEqual({
       seconds: 0,

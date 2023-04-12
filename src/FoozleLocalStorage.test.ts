@@ -29,7 +29,7 @@ describe('Acto Local Storage', () => {
   test('should get the initialized storage object {mock:0},increment it {mock:1}', () => {
     const obj = FLS.get();
     obj.mock++;
-    FLS.setStorageValues(obj);
+    FLS.setValue(obj);
     expect(JSON.stringify(FLS.get())).toBe(`{"mock":1}`);
   });
 
@@ -44,8 +44,8 @@ describe('Acto Local Storage', () => {
   test("should return all key / value pairs that start with 'foozle-'", () => {
     for (let i = 0; i <= 10; i++) {
       const currentPage = 'https://testactoapp.com/fun' + i;
-      FLS.setStorageKey(currentPage);
-      FLS.setStorageValues({ mock: i });
+      FLS.setUniqueId(currentPage);
+      FLS.setValue({ mock: i });
     }
     const objs = FLS.getAll();
     expect(objs).toStrictEqual({
@@ -63,4 +63,18 @@ describe('Acto Local Storage', () => {
       'foozle-time-https://testactoapp.com/fun': '{"mock":0}',
     });
   });
+
+  test("should create, find and delete value from local storage", () => {
+    FLS.deleteStoredValues('foozle-time', "", true);
+    const ui = FLS.generateUniqueId();
+    FLS.setUniqueId(ui)
+    FLS.setValue({ mock: 0 });
+    let count = Object.keys(FLS.getAll()).length
+    expect(count).toBe(1)
+    console.log(FLS.getAll())
+    FLS.deleteStoredValues('foozle-time-' + ui)
+    count = Object.keys(FLS.getAll()).length
+    expect(count).toBe(0)
+  });
+
 });
