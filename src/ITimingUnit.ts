@@ -1,4 +1,4 @@
 export interface ITimingUnit {
-    time:number;
-    calculateTime(value:number):number;
+    getIncrementUnit():number;
+    getType():string;
 }

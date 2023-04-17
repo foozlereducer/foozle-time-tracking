@@ -20,6 +20,9 @@ import { IStorage} from './IStorage';
 import { classIsInstance, isJson,  generateUniqueId} from './FoozleUtils'
 import { ITimingUnit } from './ITimingUnit';
 import { FoozleTimingUnit } from './FoozleTimingUnit';
+import Seconds from './Seconds';
+import Milliseconds from './Milliseconds';
+import Days from './Days';
 
 
 export { 
@@ -27,5 +30,5 @@ export {
     MergeObjs, FoozleTimer, ConfigFactory, PageTime, VideoProps, 
     ICreateObj, ILooseObject,  FoozleEventsBinder, FoozleTimeTrackEvent,
     ISubject, IObserver, Observers, IStorage, classIsInstance, isJson, generateUniqueId,
-    ITimingUnit, FoozleTimingUnit
+    ITimingUnit, FoozleTimingUnit, Seconds, Milliseconds, Days
 };
