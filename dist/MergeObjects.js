@@ -16,3 +16,4 @@ class MergeObjs {
     }
 }
 export default MergeObjs;
+//# sourceMappingURL=MergeObjects.js.map

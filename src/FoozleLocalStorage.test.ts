@@ -12,7 +12,7 @@ afterEach(() => {
   FLS = null;
 });
 
-describe('Acto Local Storage', () => {
+describe('Foozle Local Storage', () => {
   test("should set the storage key to 'steve-https://testactoapp.com/fun'", () => {
     const prefix = 'steve-';
     const configObj = { mock: 0 };

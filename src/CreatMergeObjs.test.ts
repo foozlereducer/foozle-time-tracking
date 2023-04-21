@@ -1,5 +1,5 @@
-import CreatePageObj from './CreatePageObj';
-import CreateVideoObj from './CreateVideoObj';
+import CreatePageObj from './TimeCoreObj';
+import CreateVideoObj from './TimeVimeoObj';
 import MergeObjs from './MergeObjects';
 let CVO: any = null;
 let CPO: any = null;
@@ -25,7 +25,7 @@ describe('Create Acto Objs', () => {
     const vidObj = CVO.createObj();
     const mergedObjs = MO.execute(pageObj, vidObj);
     expect(mergedObjs).toStrictEqual({
-      seconds: 0,
+      milliseconds: 0,
       video: { isplaying: true, volume: 15, progress: 11.0502, videoname: 'abc' },
     });
   });

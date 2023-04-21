@@ -1,1 +1,2 @@
-"use strict";
+export {};
+//# sourceMappingURL=IStrategy.js.map

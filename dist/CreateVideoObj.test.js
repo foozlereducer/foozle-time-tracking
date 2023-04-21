@@ -22,3 +22,4 @@ describe('Create Acto Objs', () => {
         expect(obj).toStrictEqual({ video: { isplaying: true, volume: 15, progress: 11.0502, videoname: 'abc' } });
     });
 });
+//# sourceMappingURL=CreateVideoObj.test.js.map

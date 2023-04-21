@@ -1,9 +1,9 @@
 import FoozleLocalStorage from './FoozleLocalStorage';
-import CreatePageObj from './CreatePageObj';
-import CreateVideoObj from './CreateVideoObj';
+import CreatePageObj from './TimeCoreObj';
+import CreateVideoObj from './TimeVimeoObj';
 import MergeObjs from './MergeObjects';
-import Foozletimer from './FoozleTimer';
-import ConfigFactory from './ConfigFactory';
+import Foozletimer from './FoozleTimer.tz';
+import ConfigFactory from './StrategyFactory';
 import PageTime from './PageTime';
 const uniqueId = window.location.href;
 // Set up the config object that will be stored in local storage
@@ -25,3 +25,4 @@ AT.startTimer();
 const vimeovidid = document.addEventListener('vimeo-vid', (e) => {
     throw new Error('Vimeo Video');
 });
+//# sourceMappingURL=foozleTimerMain.js.map

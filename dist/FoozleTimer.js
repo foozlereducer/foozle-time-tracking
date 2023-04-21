@@ -1,34 +1,24 @@
-import ActoLocalStorage from './FoozleLocalStorage';
 class ActoTimer {
     i = 0;
-    FLS;
+    storage;
     configObj;
     TM;
     timerInterval;
-    timeStratey;
+    timeStrategy;
     /**
      * Constructor
-     * @param FLS - an instance of thee ActoLocalStorage class
-     * @param i - the start counting value
+     * @param storage - an instance of thee a storage class that implements IStorage
+     * @param timeUnit  - an instance of ITimeUnit
      */
-    constructor(FLS, i = 0) {
-        if (false === FLS instanceof ActoLocalStorage) {
-            throw new Error('The first parameter of FoozleTimer constructor must be an instance of FoozleLocalStorage');
-        }
-        if ('number' !== typeof i) {
-            i = 0;
-        }
+    constructor(storage, TimeStrategy) {
         // Bind `this` to only the class instance
         this.increment = this.increment.bind(this);
         this.getSeconds = this.getSeconds.bind(this);
-        this.FLS = FLS;
-        this.configObj = this.FLS.get();
-        this.i = i;
+        this.storage = storage;
+        this.configObj = this.storage.get();
         this.timerInterval = null;
-        this.timeStratey = null;
-    }
-    setTimeStrategy(TimeStrategy) {
-        this.timeStratey = TimeStrategy;
+        this.timeStrategy = TimeStrategy;
+        this.i = this.timeStrategy.getIncrementUnit();
     }
     /**
      * Increment Counter
@@ -37,9 +27,9 @@ class ActoTimer {
     increment() {
         this.i++;
         // Use the time strategy to get an updated config object
-        this.configObj = this.timeStratey.doAction(this.configObj, this.i);
+        this.configObj = this.timeStrategy.doAction(this.configObj, this.i);
         // Write the updated config object to storage
-        this.FLS.setStorageValues(this.configObj);
+        this.storage.setValue(this.configObj);
     }
     /**
      * Set Seconds
@@ -61,7 +51,7 @@ class ActoTimer {
      */
     getStoredTime() {
         // Use storage to get the stored time object
-        const storedTime = this.FLS.get();
+        const storedTime = this.storage.get();
         // return the seconds attached as node on the config object
         return storedTime.seconds;
     }
@@ -70,7 +60,7 @@ class ActoTimer {
      * @returns object - the config object literal
      */
     getconfigObj() {
-        return this.FLS.get();
+        return this.storage.get();
     }
     startTimer(intervalTime = 1000) {
         this.timerInterval = setInterval(this.increment, intervalTime);
@@ -83,3 +73,4 @@ class ActoTimer {
     }
 }
 export default ActoTimer;
+//# sourceMappingURL=FoozleTimer.js.map

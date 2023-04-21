@@ -50,3 +50,4 @@ class CreateVideoObj {
     }
 }
 export default CreateVideoObj;
+//# sourceMappingURL=CreateVideoObj.js.map

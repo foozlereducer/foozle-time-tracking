@@ -1,28 +1,8 @@
+import AbsStorage from './AbsStorage';
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
  */
-class FoozleLocalStorage {
-    /**
-     * Config Object - the full storage config object literal
-     */
-    configObj;
-    /**
-     * Id that is used as an unique part of the storage key
-     */
-    uniqueId;
-    /**
-     * A prefix for the storage key for the config object
-     */
-    prefix;
-    /**
-     * Constructor - binds methods and intilizes the properties
-     */
-    constructor() {
-        this.get.bind(this);
-        this.configObj = {};
-        this.uniqueId = '';
-        this.prefix = '';
-    }
+class FoozleLocalStorage extends AbsStorage {
     /**
      * Init - initializes the storage object by writting to local storage
      * @param configObj - an exernally create config object
@@ -47,13 +27,6 @@ class FoozleLocalStorage {
         return JSON.parse(p);
     }
     /**
-     * Get Page
-     * @returns string - the page or unique name for the storage key
-     */
-    getPage() {
-        return this.uniqueId;
-    }
-    /**
      * Get all of the acto storage keeys; filter all other storage key out
      * @returns
      */
@@ -68,32 +41,34 @@ class FoozleLocalStorage {
         return filtered;
     }
     /**
-     * Set - set the local storage by componding a key of prefix and page and store the config object
-     * @param value
+     * Set Value - set the local storage by componding a key of prefix and uniqueId and combines and stores the config object
+     * @param value: object
      */
-    setStorageValues(value) {
+    setValue(value) {
         localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
     }
     /**
-     * Set Page - sets the unique page or name to be used as a storage key
-     * @param pagename
+     * Delete a value or all values from local storage that match a string
+     * @param searchStr - a string to match ( single delete) or match ( all deleted)
+     * @param subUniqueId - combines to delete binders that match the searchStr
+     * @param all: bool - set to true all matches are deleted if false a single match is done
      */
-    setStorageKey(uniqueId) {
-        this.uniqueId = uniqueId;
-    }
-    /**
-     * Get Prefix - get the prefix ~ uses appended to the storage key
-     * @returns string - the prefix
-     */
-    getPrefix() {
-        return this.prefix;
-    }
-    /**
-     * Set Prefix
-     * @param prefix
-     */
-    setPrefix(prefix) {
-        this.prefix = prefix;
+    deleteStoredValues(searchStr, subUniqueId = null, all = false) {
+        const obj = this.getAll();
+        console.log(obj);
+        for (const [key, value] of Object.entries(obj)) {
+            if (false === all) {
+                if (key === searchStr) {
+                    localStorage.removeItem(key);
+                }
+            }
+            else {
+                if (key.includes(searchStr)) {
+                    localStorage.removeItem(key);
+                }
+            }
+        }
     }
 }
 export default FoozleLocalStorage;
+//# sourceMappingURL=FoozleLocalStorage.js.map

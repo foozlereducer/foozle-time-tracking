@@ -3,32 +3,34 @@
  * it this way the rolup more consistently will build true rather than assumed linking
  */
 import FoozleLocalStorage from './FoozleLocalStorage';
-import CreatePageObj from './CreatePageObj';
-import CreateVideoObj from './CreateVideoObj';
+import TimeCoreObj from './TimeCoreObj';
+import TimeVimeoObj from './TimeVimeoObj';
 import MergeObjs from './MergeObjects';
 import FoozleTimer from './FoozleTimer';
-import ConfigFactory from './ConfigFactory';
-import PageTime from './PageTime';
-import VideoProps from './VideoProps';
-import ICreateObj from './iCreateObj';
+import ConfigFactory from './StrategyFactory';
 import ILooseObject from './iLooseObject';
 import { FoozleEventsBinder } from './FoozleEventsBinder';
-import { FoozleTimeTrackEvent } from './FoozleTimeTrackEvent';
 import { ISubject } from './ISubject';
 import { IObserver, Observers } from './IObserver';
 import { IStorage} from './IStorage';
 import { classIsInstance, isJson,  generateUniqueId} from './FoozleUtils'
 import { ITimingUnit } from './ITimingUnit';
-import { FoozleTimingUnit } from './FoozleTimingUnit';
-import Seconds from './Seconds';
-import Milliseconds from './Milliseconds';
-import Days from './Days';
+import TimeUnitSeconds from './TimeUnitSeconds';
+import TimeUnitMilliseconds from './TimeUnitMilliseconds';
+import TimeUnitDays from './TimeUnitDays';
+import IObj from './IObj';
+import { IStrategy } from './IStrategy';
+import StrategyFactory from  './StrategyFactory';
+import { StrategyConstructor } from './StrategyConstructor';
+import { FoozleCoreIncrement } from './FoozleCoreIncrement'
+import AbsIncrement from './AbsIncrement';
 
 
 export { 
-    FoozleLocalStorage, CreatePageObj, CreateVideoObj, 
-    MergeObjs, FoozleTimer, ConfigFactory, PageTime, VideoProps, 
-    ICreateObj, ILooseObject,  FoozleEventsBinder, FoozleTimeTrackEvent,
-    ISubject, IObserver, Observers, IStorage, classIsInstance, isJson, generateUniqueId,
-    ITimingUnit, FoozleTimingUnit, Seconds, Milliseconds, Days
+    FoozleLocalStorage, TimeCoreObj, TimeVimeoObj, MergeObjs, ConfigFactory, 
+    ILooseObject,  FoozleEventsBinder, ISubject, IObserver, 
+    Observers, IStorage, classIsInstance, isJson, generateUniqueId, 
+    ITimingUnit, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, IObj, 
+    IStrategy, StrategyConstructor, StrategyFactory, FoozleCoreIncrement,
+    AbsIncrement, FoozleTimer
 };

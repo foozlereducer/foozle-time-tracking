@@ -32,3 +32,4 @@ class CreatePageObj {
     }
 }
 export default CreatePageObj;
+//# sourceMappingURL=CreatePageObj.js.map

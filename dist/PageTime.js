@@ -12,3 +12,4 @@ class PageTime {
     }
 }
 export default PageTime;
+//# sourceMappingURL=PageTime.js.map

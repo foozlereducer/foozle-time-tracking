@@ -1,30 +1,28 @@
+import { IStrategy } from "./index";
 class ActoTimer {
   i = 0;
   storage: any;
   configObj: any;
   TM: any;
   timerInterval: any;
-  timeStratey: any;
+  timeStrategy: any;
   /**
    * Constructor
    * @param storage - an instance of thee a storage class that implements IStorage
    * @param timeUnit  - an instance of ITimeUnit
    */
-  constructor(storage: any, i = 0) {
+  constructor(storage: any, TimeStrategy: IStrategy) {
 
     // Bind `this` to only the class instance
     this.increment = this.increment.bind(this);
     this.getSeconds = this.getSeconds.bind(this);
     this.storage = storage;
     this.configObj = this.storage.get();
-    this.i = i;
     this.timerInterval = null;
-    this.timeStratey = null;
+    this.timeStrategy = TimeStrategy;
+    this.i = this.timeStrategy.getIncrementUnit();
   }
 
-  setTimeStrategy(TimeStrategy: any) {
-    this.timeStratey = TimeStrategy;
-  }
   /**
    * Increment Counter
    * @param TimeStrategy - a concret time strategy that will manage their respective portions of the config object.
@@ -32,7 +30,7 @@ class ActoTimer {
   increment() {
     this.i++;
     // Use the time strategy to get an updated config object
-    this.configObj = this.timeStratey.doAction(this.configObj, this.i);
+    this.configObj = this.timeStrategy.doAction(this.configObj, this.i);
     // Write the updated config object to storage
     this.storage.setValue(this.configObj);
   }

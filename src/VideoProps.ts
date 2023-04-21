@@ -1,3 +1,4 @@
+import { IStrategy } from "./index";
 /**
  * Video Time is a concrete strategy that will manage the page time
  */

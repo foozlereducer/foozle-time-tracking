@@ -3,7 +3,7 @@
  * @param obj
  * @returns
  */
-export function classIsInstance(obj) {
+function classIsInstance(obj) {
     const isCtorClass = obj.constructor && obj.constructor.toString().substring(0, 5) === 'class';
     if (obj.prototype === undefined) {
         return isCtorClass;
@@ -18,7 +18,7 @@ export function classIsInstance(obj) {
  * @param str - to test if or if not is JSON
  * @returns bool - true if it is JSON and false if it is Not JSON
  */
-export function isJson(str) {
+function isJson(str) {
     try {
         JSON.parse(str);
     }
@@ -27,3 +27,13 @@ export function isJson(str) {
     }
     return true;
 }
+/**
+ * Generate Uniqque Id - creates a unix time stamp to provide somewhat uniqueness
+ * @returns
+ */
+function generateUniqueId() {
+    const date = new Date();
+    return Math.floor(date.getTime() / 1000).toString();
+}
+export { classIsInstance, isJson, generateUniqueId };
+//# sourceMappingURL=FoozleUtils.js.map

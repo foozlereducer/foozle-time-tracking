@@ -1,5 +1,3 @@
-import {ILooseObject} from './index';
-
 /**
  * Abstrace Storage - provides a base for any storage type to extend and be compliant with the IStorage interface
  */
