@@ -17,7 +17,7 @@ afterEach(() => {
 describe('Can create different time units like seconds and microseconds', () => {
   test('should return seconds in the non-decimal number format of 0 or 5', () => {
     expect(SEC.getIncrementUnit()).toBe(1000)
-    expect(SEC.getType()).toBe('seconds')
+    expect(SEC.getType()).toBe('secondsAsMilliseconds')
   });
 
   test('should return micro-seconds number format of 1', () => {
@@ -28,7 +28,7 @@ describe('Can create different time units like seconds and microseconds', () => 
 
   test('should return days number format of seconds', () => {
     expect(DYS.getIncrementUnit()).toBe(86400000)
-    expect(DYS.getType()).toBe('days')
+    expect(DYS.getType()).toBe('daysAsMilliseconds')
   });
 
 });
