@@ -24,6 +24,6 @@ export class FoozleCoreIncrement extends AbsIncrement implements IStrategy {
      * @returns object - a Core timing object
      */
     doAction() {
-        return this.Obj.setObj(this.Obj.getTime() + this.TimeUnit.getIncrementUnit())
+        return this.Obj.setObj(this.Obj.getTime() + this.TimeUnit.getIncrementUnit(), this.TimeUnit.getType())
     }
 }

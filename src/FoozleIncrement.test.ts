@@ -8,7 +8,6 @@ let SF:StrategyFactory | null;
 beforeEach(() => {
     SF = new StrategyFactory();
     Obj = SF.request(TimeCoreObj)
-    Obj.setObj();
     TimeInSeconds = SF.request(TimeUnitSeconds)
     FCI = new FoozleCoreIncrement(TimeInSeconds, Obj);
 });
@@ -22,9 +21,10 @@ afterEach(() => {
 
 describe('Foozle Increment', () => {
   test('should increment the seconds time unit to 1000 milliseconds', () => {
-    expect(FCI?.increment()).toStrictEqual({ milliseconds: 1000});
-    expect(FCI?.increment()).toStrictEqual({ milliseconds: 2000});
-    expect(FCI?.increment()).toStrictEqual({ milliseconds: 3000});
+    Obj.setObj(0, 'secondsInMilliseconds');
+    expect(FCI?.increment()).toStrictEqual({ secondsAsMilliseconds: 1000});
+    expect(FCI?.increment()).toStrictEqual({ secondsAsMilliseconds: 2000});
+    expect(FCI?.increment()).toStrictEqual({ secondsAsMilliseconds: 3000});
   });
 
   test('should increment the milliseconds by 1 milliseconds', () => {
@@ -35,6 +35,16 @@ describe('Foozle Increment', () => {
     expect(FCI?.increment()).toStrictEqual({ milliseconds: 1});
     expect(FCI?.increment()).toStrictEqual({ milliseconds: 2});
     expect(FCI?.increment()).toStrictEqual({ milliseconds: 3});
+  });
+
+  test('should increment the Days by 8600000 milliseconds', () => {
+    Obj = SF?.request(TimeCoreObj)
+    Obj.setObj(0, 'daysAsMilliseconds');
+    const TimeInDays= SF?.request(TimeUnitDays)
+    FCI = new FoozleCoreIncrement(TimeInDays, Obj);
+    expect(FCI?.increment()).toStrictEqual({ daysAsMilliseconds: 86400000});
+    expect(FCI?.increment()).toStrictEqual({ daysAsMilliseconds: 172800000});
+    expect(FCI?.increment()).toStrictEqual({ daysAsMilliseconds: 259200000});
   });
 
 });

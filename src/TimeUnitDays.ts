@@ -8,7 +8,7 @@ class TimeUnitDays implements IStrategy {
     baseMilliseconds:number;
 
     constructor() {
-        this.timeType = 'days';
+        this.timeType = 'daysAsMilliseconds';
         this.incrementUnit = 1;
         this.baseMilliseconds = 86400000;
     }

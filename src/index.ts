@@ -7,7 +7,6 @@ import TimeCoreObj from './TimeCoreObj';
 import TimeVimeoObj from './TimeVimeoObj';
 import MergeObjs from './MergeObjects';
 import FoozleTimer from './FoozleTimer';
-import ConfigFactory from './StrategyFactory';
 import ILooseObject from './iLooseObject';
 import { FoozleEventsBinder } from './FoozleEventsBinder';
 import { ISubject } from './ISubject';
@@ -27,7 +26,7 @@ import AbsIncrement from './AbsIncrement';
 
 
 export { 
-    FoozleLocalStorage, TimeCoreObj, TimeVimeoObj, MergeObjs, ConfigFactory, 
+    FoozleLocalStorage, TimeCoreObj, TimeVimeoObj, MergeObjs, 
     ILooseObject,  FoozleEventsBinder, ISubject, IObserver, 
     Observers, IStorage, classIsInstance, isJson, generateUniqueId, 
     ITimingUnit, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, IObj, 

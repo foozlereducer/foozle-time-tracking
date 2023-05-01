@@ -1,10 +1,10 @@
-import {IObj} from './index';
+import {IObj, IStrategy} from './index';
 import ILooseObject from './iLooseObject';
 
 /**
  * Creates a Page Object
  */
-class TimeCoreObj implements IObj {
+class TimeCoreObj implements IObj, IStrategy {
   // Page Object set to accept dynamic properties
   obj: ILooseObject = {};
   key:string;
@@ -38,6 +38,7 @@ class TimeCoreObj implements IObj {
   }
 
   doAction(time:number) {
+    this.obj = {};
     this.obj[this.key] = time;
     return this.obj;
   }

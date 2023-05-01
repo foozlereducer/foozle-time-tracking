@@ -8,7 +8,7 @@ class TimeUnitSeconds implements IStrategy {
     baseMiliseconds = 1000;
 
     constructor() {
-        this.timeType = 'seconds';
+        this.timeType = 'secondsAsMilliseconds';
         this.incrementUnit = 1;
         this.baseMiliseconds = 1000;
     }
