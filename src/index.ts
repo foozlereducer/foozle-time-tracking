@@ -3,8 +3,8 @@
  * it this way the rolup more consistently will build true rather than assumed linking
  */
 import FoozleLocalStorage from './FoozleLocalStorage';
-import TimeCoreObj from './TimeCoreObj';
-import TimeVimeoObj from './TimeVimeoObj';
+import TimeObjCore from './TimeObjCore';
+import TimeObjVimeo from './TimeObjVimeo';
 import MergeObjs from './MergeObjects';
 import FoozleTimer from './FoozleTimer';
 import ILooseObject from './iLooseObject';
@@ -21,15 +21,16 @@ import IObj from './IObj';
 import { IStrategy } from './IStrategy';
 import StrategyFactory from  './StrategyFactory';
 import { StrategyConstructor } from './StrategyConstructor';
-import { FoozleCoreIncrement } from './FoozleCoreIncrement'
+import { FoozleIncrementCore} from './FoozleIncrementCore'
+import { FoozleIncrementVimeo } from './FoozleIncrementVimeo';
 import AbsIncrement from './AbsIncrement';
 
 
 export { 
-    FoozleLocalStorage, TimeCoreObj, TimeVimeoObj, MergeObjs, 
+    FoozleLocalStorage, TimeObjCore, TimeObjVimeo, MergeObjs, 
     ILooseObject,  FoozleEventsBinder, ISubject, IObserver, 
     Observers, IStorage, classIsInstance, isJson, generateUniqueId, 
     ITimingUnit, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, IObj, 
-    IStrategy, StrategyConstructor, StrategyFactory, FoozleCoreIncrement,
+    IStrategy, StrategyConstructor, StrategyFactory, FoozleIncrementCore, FoozleIncrementVimeo,
     AbsIncrement, FoozleTimer
 };

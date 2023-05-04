@@ -1,4 +1,4 @@
-import TimeCoreObjObj from './TimeCoreObj';
+import TimeCoreObjObj from './TimeObjCore';
 let CPO: any = null;
 
 beforeEach(() => {

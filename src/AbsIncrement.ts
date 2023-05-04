@@ -8,7 +8,13 @@ abstract class AbsIncrement {
         this.Obj = Obj;
     }
 
-    increment():object {
+    /**
+     * icrement must be overriden 
+     * @param params - any number of any type
+     * @param args - any args
+     * @returns object
+     */
+    increment(params: any, ...args: any[]): object {
        return {};
     }
 }

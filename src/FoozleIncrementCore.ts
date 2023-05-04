@@ -2,11 +2,11 @@ import {IStrategy} from "./index"
 import AbsIncrement from "./AbsIncrement";
 
 /**
- * Foozle Core Increment - increments the TimeCore object 
- * It's constructor and properties are defined in the abstract class it extends. 
+ * Foozle Increment Core - increments the TimeCore object 
+ * ****** It's CONSTRUCTOR AND PROPERTIES are defined IN THE ABSTRACT CLASS it extends. *******
  * This allows all of the increment strategies to inherit these class properties, constructor and increment
  */
-export class FoozleCoreIncrement extends AbsIncrement implements IStrategy {
+export class FoozleIncrementCore extends AbsIncrement implements IStrategy {
     /**
      * Increment - is responsible to increment time by the base increment unit.
      * The increement unit will be used by the JS timer events so in doing this we keep the 

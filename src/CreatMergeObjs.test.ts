@@ -1,4 +1,4 @@
-import CreatePageObj from './TimeCoreObj';
+import CreatePageObj from './TimeObjCore';
 import CreateVideoObj from './TimeVimeoObj';
 import MergeObjs from './MergeObjects';
 let CVO: any = null;
