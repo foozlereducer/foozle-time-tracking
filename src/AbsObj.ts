@@ -12,8 +12,8 @@ abstract class AbsObj {
      */
     constructor() {
         this.obj = {};
-        this.timeKey = '';
-        this.timePrecision = 0;
+        this.timeKey = 'milliseconds';
+        this.timePrecision = 4;
         this.time = 0;
     }
 

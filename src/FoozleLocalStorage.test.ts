@@ -71,7 +71,6 @@ describe('Foozle Local Storage', () => {
     FLS.setValue({ mock: 0 });
     let count = Object.keys(FLS.getAll()).length
     expect(count).toBe(1)
-    console.log(FLS.getAll())
     FLS.deleteStoredValues('foozle-time-' + ui)
     count = Object.keys(FLS.getAll()).length
     expect(count).toBe(0)

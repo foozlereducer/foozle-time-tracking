@@ -8,22 +8,12 @@ import AbsIncrement from "./AbsIncrement";
  */
 export class FoozleIncrementCore extends AbsIncrement implements IStrategy {
     /**
-     * Increment - is responsible to increment time by the base increment unit.
-     * The increement unit will be used by the JS timer events so in doing this we keep the 
-     * increment in sync with the set timer event 
-     * @returns Object
-     */
-    increment():object {
-       return this.doAction();
-    }
-
-    /**
      * Do action - is a strategy enforced function to be guarenteed implement 
      * It should alwasy contain the primary calculations or algorhythms so if it is called 
      * directly it will provide the correct value.
      * @returns object - a Core timing object
      */
-    doAction() {
+    doAction():object {
         return this.Obj.setObj(this.Obj.getTime() + this.TimeUnit.getIncrementUnit(), this.TimeUnit.getType())
     }
 }

@@ -24,6 +24,7 @@ import { StrategyConstructor } from './StrategyConstructor';
 import { FoozleIncrementCore} from './FoozleIncrementCore'
 import { FoozleIncrementVimeo } from './FoozleIncrementVimeo';
 import AbsIncrement from './AbsIncrement';
+import AbsObj from './AbsObj';
 
 
 export { 
@@ -32,5 +33,5 @@ export {
     Observers, IStorage, classIsInstance, isJson, generateUniqueId, 
     ITimingUnit, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, IObj, 
     IStrategy, StrategyConstructor, StrategyFactory, FoozleIncrementCore, FoozleIncrementVimeo,
-    AbsIncrement, FoozleTimer
+    AbsIncrement, FoozleTimer, AbsObj
 };

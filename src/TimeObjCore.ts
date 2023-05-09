@@ -5,13 +5,7 @@ import AbsObj from './AbsObj';
  * Creates a Page Object
  */
 class TimeObjCore extends AbsObj implements IObj, IStrategy {
-  /**
-   * Create Object - an interface enforced method that can be trusted to return a page config object
-   * @returns the page config object
-   */
-  createObj(): object {
-    return this.setObj();
-  }
+ 
   /**
    *
    * @param key - a key that defines the top reference value of the Page's object literal

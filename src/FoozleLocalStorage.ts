@@ -62,7 +62,6 @@ class FoozleLocalStorage extends AbsStorage implements IStorage {
    */
   deleteStoredValues(searchStr: string, subUniqueId: string|null = null, all:boolean = false) {
     const obj = this.getAll();
-    console.log(obj)
     
       for (const [key, value] of Object.entries(obj)) {
         if ( false === all ) {

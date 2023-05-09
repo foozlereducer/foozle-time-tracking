@@ -1,26 +1,23 @@
-import { IStrategy } from "./index";
+import { IStrategy, AbsIncrement, AbsObj } from "./index";
 class ActoTimer {
-  i = 0;
   storage: any;
-  configObj: any;
   TM: any;
   timerInterval: any;
-  timeStrategy: any;
-  /**
-   * Constructor
-   * @param storage - an instance of thee a storage class that implements IStorage
-   * @param timeUnit  - an instance of ITimeUnit
-   */
-  constructor(storage: any, TimeStrategy: IStrategy) {
+  fIncrement: AbsIncrement;
+  configObj:object | null;
+
+/**
+ * Construct
+ * @param Storage - a storage strategy
+ * @param Increment - a increment strategy
+ */
+  constructor(Storage: any, Increment:AbsIncrement) {
 
     // Bind `this` to only the class instance
-    this.increment = this.increment.bind(this);
-    this.getSeconds = this.getSeconds.bind(this);
-    this.storage = storage;
-    this.configObj = this.storage.get();
+    this.fIncrement = Increment;
+    this.storage = Storage;
     this.timerInterval = null;
-    this.timeStrategy = TimeStrategy;
-    this.i = this.timeStrategy.getIncrementUnit();
+    this.configObj = null;
   }
 
   /**
@@ -28,25 +25,8 @@ class ActoTimer {
    * @param TimeStrategy - a concret time strategy that will manage their respective portions of the config object.
    */
   increment() {
-    this.i++;
-    // Use the time strategy to get an updated config object
-    this.configObj = this.timeStrategy.doAction(this.configObj, this.i);
     // Write the updated config object to storage
     this.storage.setValue(this.configObj);
-  }
-  /**
-   * Set Seconds
-   * @param counter number - a number that represents the Timer's count
-   */
-  setSeconds(counter = 0) {
-    this.i = counter;
-  }
-  /**
-   * Get Seconds
-   * @returns number - the current ActoTimer count in seconds
-   */
-  getSeconds() {
-    return this.i;
   }
 
   /**
@@ -63,8 +43,12 @@ class ActoTimer {
    * Get Config Object - the current state of it.
    * @returns object - the config object literal
    */
-  getconfigObj() {
+  getConfigObj() {
     return this.storage.get();
+  }
+
+  setConfigObj(configObj:object = {}) {
+    this.configObj = configObj;
   }
 
   startTimer(intervalTime = 1000) {

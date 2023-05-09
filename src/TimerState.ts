@@ -18,12 +18,10 @@ export class TimerState implements ISubject {
   // Detach an observer from the subject.
   detach(observer: IObserver): void {
     let a = 1 + 1; 
-    console.log(a)
   }
 
   // Notify all observers about an event.
   notify(): void {
     let a = 1 + 1; 
-    console.log(a)
   }
 }
