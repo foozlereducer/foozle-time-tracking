@@ -1,4 +1,4 @@
-import TimeCoreObjObj from './TimeCoreObj';
+import TimeCoreObjObj from './TimeObjCore';
 let CPO = null;
 beforeEach(() => {
     CPO = new TimeCoreObjObj();
@@ -8,8 +8,7 @@ afterEach(() => {
 });
 describe('Create Acto Objs', () => {
     test('should get a default page timing object (in milliseconds)', () => {
-        CPO.setObj();
-        const obj = CPO.createObj();
+        const obj = CPO.setObj();
         expect(obj).toStrictEqual({ milliseconds: 0 });
     });
 });

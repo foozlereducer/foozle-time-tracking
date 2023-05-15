@@ -14,7 +14,9 @@
 		"prepublishOnly": "npm run test && npm run lint",
 		"preversion": "npm run lint",
 		"version": "npm run format && git add -A src",
-		"postversion": "git push && git push --tags"
+		"postversion": "git push && git push --tags",
+		"server": "live-server --port=3232"
+
 	},
 	"files": [
 		"dist/**/*"

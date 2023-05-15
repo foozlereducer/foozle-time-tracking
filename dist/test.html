@@ -32,17 +32,36 @@
     </select>
   
   <picture id="">
-    <img src="./imgs/dock-with-posts.jpeg" />
+    <img alt="image of dock-with posts" src="./imgs/dock-with-posts.jpeg" />
   </picture>
   <div id="Sailing Video"></div>
 
   <script src="https://player.vimeo.com/api/player.js"></script>
-  <script type="module" src="./actoTimermain.js"></script>
+
 
 <script type="module">
+    import {TimeObjCore, StrategyFactory, FoozleIncrementCore, TimeUnitSeconds, FoozleLocalStorage, FoozleTimer} from "./index.js"
+   
+
+    const SF = new StrategyFactory();
+    const Obj = SF.request(TimeObjCore)
+    Obj.setTimePrecision();
+    const TimeInSeconds = SF.request(TimeUnitSeconds)
+    const FCIncrement = new FoozleIncrementCore(TimeInSeconds, Obj);
+    const configObj = { mock: 0 };
+    const page = 'https://testactoapp.com/fun';
+    const FLS = new FoozleLocalStorage();
+    FLS.init(configObj, page);
+
+    const FT = new FoozleTimer();
+    FT.startTimer();
+    FCIncrement.removeEvent()
+   
+
     
+   
 
-
+/**
     throw new Error('stopping');
 
     function startTimerInterval(intervalTime=1000, counter=null) {
@@ -141,6 +160,7 @@
       videoPlayer.play();
       incrementId = startTimerInterval(1000, ATimer.getSeconds);
     });
+*/
   </script>
 </body>
 </html>

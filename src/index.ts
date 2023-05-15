@@ -33,5 +33,5 @@ export {
     Observers, IStorage, classIsInstance, isJson, generateUniqueId, 
     ITimingUnit, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, IObj, 
     IStrategy, StrategyConstructor, StrategyFactory, FoozleIncrementCore, FoozleIncrementVimeo,
-    AbsIncrement, FoozleTimer, AbsObj
+    AbsIncrement, FoozleTimer, AbsObj,
 };

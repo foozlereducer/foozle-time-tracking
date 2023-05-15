@@ -6,7 +6,7 @@ class TimeUnitDays {
     incrementUnit;
     baseMilliseconds;
     constructor() {
-        this.timeType = 'days';
+        this.timeType = 'daysAsMilliseconds';
         this.incrementUnit = 1;
         this.baseMilliseconds = 86400000;
     }

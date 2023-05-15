@@ -1,8 +1,7 @@
-
-abstract class AbsIncrement {
+abstract class AbsIncrement{
     TimeUnit:any;
     Obj:any;
-    
+
     constructor(TimeUnit:any, Obj:any) {
         this.TimeUnit = TimeUnit;
         this.Obj = Obj;

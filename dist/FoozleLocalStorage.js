@@ -1,4 +1,4 @@
-import AbsStorage from './AbsStorage';
+import AbsStorage from './AbsStorage.js';
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
  */
@@ -55,7 +55,6 @@ class FoozleLocalStorage extends AbsStorage {
      */
     deleteStoredValues(searchStr, subUniqueId = null, all = false) {
         const obj = this.getAll();
-        console.log(obj);
         for (const [key, value] of Object.entries(obj)) {
             if (false === all) {
                 if (key === searchStr) {

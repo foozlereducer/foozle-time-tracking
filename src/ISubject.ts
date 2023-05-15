@@ -13,3 +13,5 @@ export interface ISubject {
   // Notify all observers about an event.
   notify(): void;
 }
+export { IObserver };
+

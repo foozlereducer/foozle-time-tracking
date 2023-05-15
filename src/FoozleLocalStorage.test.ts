@@ -2,9 +2,9 @@ import FoozleLocalStorage from './FoozleLocalStorage';
 let FLS: any = null;
 
 beforeEach(() => {
-  const configObj = { mock: 0 };
   const page = 'https://testactoapp.com/fun';
   FLS = new FoozleLocalStorage();
+  const configObj = { mock: 0 };
   FLS.init(configObj, page);
 });
 
