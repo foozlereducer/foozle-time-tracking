@@ -1,4 +1,4 @@
-import AbsObj from './AbsObj.js';
+import AbsObj from './AbsObj';
 /**
  * Creates a Page Object
  */

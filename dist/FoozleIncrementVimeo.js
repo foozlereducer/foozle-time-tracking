@@ -1,4 +1,4 @@
-import AbsIncrement from "./AbsIncrement.js";
+import AbsIncrement from "./AbsIncrement";
 /**
  * Foozle Increment Vimeo - increments the Vimeo object
  * ****** It's CONSTRUCTOR AND PROPERTIES are defined IN THE ABSTRACT CLASS it extends. *******

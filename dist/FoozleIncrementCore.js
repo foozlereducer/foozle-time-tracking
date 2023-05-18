@@ -1,4 +1,4 @@
-import AbsIncrement from "./AbsIncrement.js";
+import AbsIncrement from "./AbsIncrement";
 /**
  * Foozle Increment Core - increments the TimeCore object
  * ****** It's CONSTRUCTOR AND PROPERTIES are defined IN THE ABSTRACT CLASS it extends. *******
@@ -20,9 +20,6 @@ export class FoozleIncrementCore extends AbsIncrement {
             this.doAction();
             console.log('in increment');
         }
-
-        const target = new EventTarget();
-        target.addEventListener('foozleInterval', console.log);
     }
 }
 //# sourceMappingURL=FoozleIncrementCore.js.map

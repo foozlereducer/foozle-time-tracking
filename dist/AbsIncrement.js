@@ -1,19 +1,9 @@
 class AbsIncrement {
     TimeUnit;
     Obj;
-    Evt;
-    eventName;
-    constructor(TimeUnit, Obj, eventName = 'FoozleInterval') {
+    constructor(TimeUnit, Obj) {
         this.TimeUnit = TimeUnit;
         this.Obj = Obj;
-        this.eventName = eventName
-        this.Evt = addEventListener(this.eventName, () => {
-            console.log('fired in TimeObjCore' + "\n")
-        })
-    }
-
-    removeEvent() {
-        removeEventListener(this.eventName, this.Evt);
     }
     /**
      * icrement must be overriden

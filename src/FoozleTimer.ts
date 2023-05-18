@@ -1,31 +1,31 @@
+import { EventEmitter } from "./EventEmitter";
 
 class ActoTimer extends EventTarget {
   storage: any;
   TM: any;
   timerInterval: any;
-  AtEvent:Event;
+  eventEmitter:EventEmitter;
   target:EventTarget;
 
 /**
  * Construct
  */
-  constructor( ) {
+  constructor(Emit:EventEmitter) {
     super();
     this.timerInterval = null;
     this.target = new  EventTarget();
-    this.AtEvent = new Event("FoozleInterval")
-
+    this.eventEmitter = Emit;
   }
 
   /**
-   * Time Becon
+   * Time interval callback function
    */
-  timeBecon() {
-    this.dispatchEvent(this.AtEvent);
+  emit(listener:EventTarget) {
+    this.eventEmitter.emit('foozleInterval', listener)
   }
 
   startTimer(intervalTime = 1000) {
-    this.timerInterval = setInterval(this.timeBecon, intervalTime);
+    this.timerInterval = setInterval(this.emit, intervalTime);
   }
 
   stopTimer() {

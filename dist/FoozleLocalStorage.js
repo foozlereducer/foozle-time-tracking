@@ -1,4 +1,4 @@
-import AbsStorage from './AbsStorage.js';
+import AbsStorage from './AbsStorage';
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
  */
