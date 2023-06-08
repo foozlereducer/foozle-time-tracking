@@ -1,0 +1,79 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Event-based Browser Testing</title>
+  <meta name="description" content="A custom roled event based browser testing">
+  <meta name="author" content="Steve Browning">
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+    <h1>Event-based Browser Testing</h1>
+    <p id="testsOutput"></p>
+    <div id="iframes"></div>
+   
+   <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        margin: 1em;
+    }
+    h1 { margin-bottom: 20px;}
+    .pass {color: green; background-color: rgb(249, 202, 141);}
+    .fail {color: red; font-weight:bold;}
+   </style> 
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        let tests = [];
+        async function runTestFiles() {
+            const response = await fetch("http://127.0.0.1:4567/testingfiles");
+            tests = await response.json();
+            console.log(tests) 
+            const iframes = document.querySelector('#iframes');
+            const testsOutput = document.querySelector('#testsOutput');  
+            
+            for(const testData of tests ) {
+                if (iframes) {
+                    
+                        let iframe = document.createElement('iframe')
+                        //iframe.scr = 'http://127.0.0.1:3232/dist/browser-tests/FoozleLocalStorageEventTest.html'
+                        iframe.setAttribute("src", "http://127.0.0.1:3232/dist/browser-tests/FoozleLocalStorageEventTest.html");
+                        iframe.width = '100%';
+                        iframe.height = '150px';
+                        iframe.frameBorder = 0;
+                        //'//`./` + testData;
+                        testsOutput.appendChild(iframe);
+                    
+                        console.log('iframe.src =', iframe.src);
+                }
+            }
+            channel.onmessage = (event) => {
+                    let node = document.createElement('p');
+                    if (event.data.status === 'pass') {
+                        node.innerHTML = `- <span class="pass">
+                            <strong>${event.data.title} - PASS!</strong></span> 
+                            ${event.data.html} <br/>`
+                    } else {
+                        node.innerHTML =node.innerHTML =  `<span class="fail"> 
+                            <strong>${event.data.title} FAIL!!!</strong> 
+                            ${event.data.html} </span><br/>`
+                    }
+                    testsOutput.appendChild(node);
+                }
+    
+        }
+        runTestFiles();
+
+        const channel = new BroadcastChannel('channel')
+        channel.postMessage('getTestDetails');
+    });
+    
+  </script>
+</body>

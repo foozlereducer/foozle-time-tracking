@@ -1,9 +1,15 @@
 export class EventEmitter {
     target;
-    constructor() {
-        this.target = new EventTarget();
+    constructor(eventTarget) {
+        if (eventTarget instanceof EventTarget) {
+            eventTarget = new EventTarget;
+        }
+        this.target = eventTarget;
     }
     on(eventName, listener) {
+        if (typeof eventName !== 'string') {
+            throw new Error('Parameter ');
+        }
         return this.target.addEventListener(eventName, listener);
     }
     once(eventName, listener) {

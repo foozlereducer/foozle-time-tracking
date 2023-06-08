@@ -14,12 +14,5 @@ export class FoozleIncrementCore extends AbsIncrement {
     doAction() {
         return this.Obj.setObj(this.Obj.getTime() + this.TimeUnit.getIncrementUnit(), this.TimeUnit.getType());
     }
-    handleEvent(e) {
-        console.log('in Increment Core caught becond', e);
-        if ('FoozleInterval' === e.type) {
-            this.doAction();
-            console.log('in increment');
-        }
-    }
 }
 //# sourceMappingURL=FoozleIncrementCore.js.map

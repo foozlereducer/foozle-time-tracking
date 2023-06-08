@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Local Storage Event Test</title>
+  <meta name="description" content="A test of a timer throwing a time event and localStorage recording it">
+  <meta name="author" content="Steve Browning">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <script src="ifvisible.js"></script>
+  <style>
+    #status {
+      display:block;
+      height: 50px;
+      width: 100%;
+      background-color: grey;
+    }
+
+    p {
+      padding-top: 15px;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Local Storage Event Test</h1>
+  <div id="status"></div>
+  <div id="desc"></div>
+  
+
+
+  <script type="module">
+    import FoozleLocalStorage from "../FoozleLocalStorage.js";
+    const fileName = location.href.split("/").slice(-1);
+    const channel = new BroadcastChannel('channel');
+    // get the status dom node
+    const status = document.getElementById('status');
+
+      
+      // Set up the Local Storage object.
+      const FLS = new FoozleLocalStorage();
+      const configObj = { mock: 0 };
+      const page = 'https://testactoapp.com/fun';
+      FLS.init(configObj, page);
+    
+
+      // the storage reciever catches the message over the event bus
+        // Now inside the closure, we set the local storage payload
+          FLS.setValue({'mock': 15});
+
+          // we then get the the stored data (in local storage)
+          const data = FLS.get();
+          // set up the status
+          status.innerHTML ='<p></p>';
+          // verify the data
+          status.style.color = 'white'
+          if ( 15 == data.mock) {
+            // style the status box and text to Pass
+            status.style.backgroundColor = 'green'
+          
+            status.innerHTML ='<p>PASS</p>';
+            channel.postMessage( {title:'Local Storage Event Test', status: 'pass', html:`The payload <code>{mock: 15}</code> was 
+              passed by a mocked increment strategy over a  broadcast channel. 
+              It did store this in localstorage.`});
+            console.log('Pass')
+          } else {
+            // style the status box and text to Fail
+            status.style.backgroundColor = 'red'
+            status.innerHTML ='<p>FAIL</p>';
+            channel.postMessage( {title:'Local Storage Event Test', status: 'fail', html:`<p>The payload <code>{mock: 15}</code> was 
+              was not passed. It did not store this in localstorage.</p>`});
+            console.log('Fail')
+          }
+    
+   
+    
+  </script>
+</body>
+</html>

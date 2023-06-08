@@ -1,11 +1,7 @@
 /**
  * Abstrace Storage - provides a base for any storage type to extend and be compliant with the IStorage interface
  */
-class AbsStorage {
-    /**
-     * Config Object - the full storage config object literal
-     */
-    configObj;
+class AbsStorage extends EventTarget {
     /**
      * Id that is used as an unique part of the storage key
      */
@@ -18,7 +14,7 @@ class AbsStorage {
      * Constructor - binds methods and intilizes the properties
      */
     constructor() {
-        this.configObj = {};
+        super();
         this.uniqueId = '';
         this.prefix = '';
     }

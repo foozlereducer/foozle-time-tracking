@@ -1,28 +1,27 @@
-import AbsStorage from './AbsStorage';
+import AbsStorage from './AbsStorage.js';
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
  */
 class FoozleLocalStorage extends AbsStorage {
     /**
      * Init - initializes the storage object by writting to local storage
-     * @param configObj - an exernally create config object
      * @param uniqueId - the web page name - or unique name that forms part of the storage key
      * @param prefix - a prefix bound to the front of the storage key
      */
-    init(configObj, uniqueId, prefix = 'foozle-time-') {
-        this.configObj = configObj;
+    init(config, uniqueId, prefix = 'foozle-time-') {
         this.uniqueId = uniqueId;
         this.prefix = prefix;
-        localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(this.configObj));
+        localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(config));
     }
     /**
      * Get - it retrieves the config object from storage
      * @returns object - a config object literal
      */
     get() {
+        console.log('get()', this.prefix, this.uniqueId);
         const p = localStorage.getItem(this.prefix + this.uniqueId);
         if (null == p) {
-            this.init(this.configObj, this.uniqueId, this.prefix);
+            this.init({}, this.uniqueId, this.prefix);
         }
         return JSON.parse(p);
     }
@@ -45,7 +44,15 @@ class FoozleLocalStorage extends AbsStorage {
      * @param value: object
      */
     setValue(value) {
-        localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
+        if ('undefined' !== typeof value && '' !== this.prefix && '' !== this.uniqueId) {
+            console.log('setValue()', this.prefix, this.uniqueId);
+            const d = JSON.stringify(value);
+            localStorage.setItem(this.prefix + this.uniqueId, d);
+        }
+        else {
+            throw new Error(`You must supply valid valie: ${value}, 
+                        prefix: ${this.prefix} and uniqueId ${this.uniqueId} properties}`);
+        }
     }
     /**
      * Delete a value or all values from local storage that match a string

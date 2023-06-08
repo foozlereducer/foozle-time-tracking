@@ -1,7 +1,8 @@
-class AbsIncrement {
+class AbsIncrement extends EventTarget {
     TimeUnit;
     Obj;
     constructor(TimeUnit, Obj) {
+        super();
         this.TimeUnit = TimeUnit;
         this.Obj = Obj;
     }

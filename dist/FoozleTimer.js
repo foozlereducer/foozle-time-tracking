@@ -2,7 +2,6 @@ class ActoTimer extends EventTarget {
     storage;
     TM;
     timerInterval;
-    AtEvent;
     target;
     /**
      * Construct
@@ -11,16 +10,15 @@ class ActoTimer extends EventTarget {
         super();
         this.timerInterval = null;
         this.target = new EventTarget();
-        this.AtEvent = new Event("FoozleInterval");
     }
     /**
-     * Time Becon
+     * Time interval callback function
      */
-    timeBecon() {
-        this.dispatchEvent(this.AtEvent);
+    emit(listener) {
+        return '';
     }
     startTimer(intervalTime = 1000) {
-        this.timerInterval = setInterval(this.timeBecon, intervalTime);
+        this.timerInterval = setInterval(this.emit, intervalTime);
     }
     stopTimer() {
         clearInterval(this.timerInterval);

@@ -19,12 +19,4 @@ export class FoozleIncrementCore extends AbsIncrement implements IStrategy {
     doAction():object {
         return this.Obj.setObj(this.Obj.getTime() + this.TimeUnit.getIncrementUnit(), this.TimeUnit.getType())
     }
-
-    handleEvent(e:Event) {
-        console.log('in Increment Core caught becond', e)
-       if('FoozleInterval' === e.type) {
-            this.doAction();
-            console.log('in increment')
-       }
-    }
 }

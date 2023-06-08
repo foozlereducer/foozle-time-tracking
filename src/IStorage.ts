@@ -1,10 +1,6 @@
 
 export interface IStorage {
     /**
-     * Config Object - the full storage config object literal
-     */
-    configObj: any;
-    /**
      * Id that is used as an unique part of the storage key
      */
     uniqueId: string | null;

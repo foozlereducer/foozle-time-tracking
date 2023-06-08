@@ -1,32 +1,43 @@
 import FoozleLocalStorage from './FoozleLocalStorage';
+
+const mockedBroadcastChannel = BroadcastChannel as jest.Mocked<typeof BroadcastChannel>;
+
 let FLS: any = null;
 
-beforeEach(() => {
+let channel = new BroadcastChannel('FoozleStorageEvent')
+channel.onmessage = msg => console.log(msg)
+
+
+let sut:any;
+let events:any = {};
+
+beforeEach( async () => {
   const page = 'https://testactoapp.com/fun';
-  FLS = new FoozleLocalStorage();
+  FLS = new FoozleLocalStorage(channel);
   const configObj = { mock: 0 };
   FLS.init(configObj, page);
+
 });
 
 afterEach(() => {
   FLS = null;
 });
 
-describe('Foozle Local Storage', () => {
-  test("should set the storage key to 'steve-https://testactoapp.com/fun'", () => {
+describe('Foozle Local Storage',  () => {
+  test("should set the storage key to 'steve-https://testactoapp.com/fun'", async () => {
     const prefix = 'steve-';
     const configObj = { mock: 0 };
     const page = 'https://testactoapp.com/fun';
-    const AS = new FoozleLocalStorage();
+    const AS = new FoozleLocalStorage(channel);
     AS.init(configObj, page, prefix);
     expect(JSON.stringify(FLS.get())).toBe(`{"mock":0}`);
   });
 
-  test("should return 'foozle-https://testactoapp.com/fun'", () => {
+  test("should return 'foozle-https://testactoapp.com/fun'", async () => {
     expect(JSON.stringify(FLS.get())).toBe(`{"mock":0}`);
   });
 
-  test('should get the initialized storage object {mock:0},increment it {mock:1}', () => {
+  test('should get the initialized storage object {mock:0},increment it {mock:1}', async () => {
     const obj = FLS.get();
     obj.mock++;
     FLS.setValue(obj);
@@ -77,3 +88,4 @@ describe('Foozle Local Storage', () => {
   });
 
 });
+

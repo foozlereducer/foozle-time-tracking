@@ -17,5 +17,6 @@ import { FoozleIncrementCore } from './FoozleIncrementCore';
 import { FoozleIncrementVimeo } from './FoozleIncrementVimeo';
 import AbsIncrement from './AbsIncrement';
 import AbsObj from './AbsObj';
-export { FoozleLocalStorage, TimeObjCore, TimeObjVimeo, MergeObjs, FoozleEventsBinder, classIsInstance, isJson, generateUniqueId, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, StrategyFactory, FoozleIncrementCore, FoozleIncrementVimeo, AbsIncrement, FoozleTimer, AbsObj, };
+import { ChannelName } from './ChannelName';
+export { FoozleLocalStorage, TimeObjCore, TimeObjVimeo, MergeObjs, FoozleEventsBinder, classIsInstance, isJson, generateUniqueId, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, StrategyFactory, FoozleIncrementCore, FoozleIncrementVimeo, AbsIncrement, FoozleTimer, AbsObj, ChannelName, };
 //# sourceMappingURL=index.js.map

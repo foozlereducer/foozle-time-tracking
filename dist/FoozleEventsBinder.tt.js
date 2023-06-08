@@ -1,5 +1,7 @@
 import { FoozleEventsBinder, FoozleLocalStorage } from './index';
-const FLS = new FoozleLocalStorage();
+import { BroadcastChannel } from 'broadcast-channel';
+const bc = new BroadcastChannel('FoozleStorageEvent');
+const FLS = new FoozleLocalStorage(bc);
 let FEB = null;
 beforeEach(() => {
     FEB = new FoozleEventsBinder(FLS);

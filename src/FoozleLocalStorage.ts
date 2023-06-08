@@ -7,15 +7,13 @@ import AbsStorage from './AbsStorage';
 class FoozleLocalStorage extends AbsStorage implements IStorage {
   /**
    * Init - initializes the storage object by writting to local storage
-   * @param configObj - an exernally create config object
    * @param uniqueId - the web page name - or unique name that forms part of the storage key
    * @param prefix - a prefix bound to the front of the storage key
    */
-  init(configObj: object, uniqueId: string, prefix: string = 'foozle-time-') {
-    this.configObj = configObj;
+  init(config:object, uniqueId:string, prefix:string='foozle-time-') {
     this.uniqueId = uniqueId;
     this.prefix = prefix;
-    localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(this.configObj));
+    localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(config));
   }
   /**
    * Get - it retrieves the config object from storage
@@ -25,7 +23,7 @@ class FoozleLocalStorage extends AbsStorage implements IStorage {
     const p: any = localStorage.getItem(this.prefix + this.uniqueId);
 
     if (null == p) {
-      this.init(this.configObj, this.uniqueId, this.prefix);
+      this.init({}, this.uniqueId, this.prefix);
     }
 
     return JSON.parse(p);
@@ -50,8 +48,12 @@ class FoozleLocalStorage extends AbsStorage implements IStorage {
    * @param value: object 
    */
   setValue(value: object):void{
-    localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
-
+    if('undefined' !== typeof value && '' !== this.prefix && '' !== this.uniqueId) {
+      localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
+    } else {
+      throw new Error(`You must supply valid valie: ${value}, 
+                        prefix: ${this.prefix} and uniqueId ${this.uniqueId} properties}`)
+    }
   }
 
   /**

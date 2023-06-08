@@ -25,8 +25,8 @@ import { FoozleIncrementCore} from './FoozleIncrementCore'
 import { FoozleIncrementVimeo } from './FoozleIncrementVimeo';
 import AbsIncrement from './AbsIncrement';
 import AbsObj from './AbsObj';
-import { EventEmitter } from './EventEmitter';
-import PubSub from './PubSub';
+import { ChannelName } from './ChannelName';
+
 
 
 export { 
@@ -35,5 +35,5 @@ export {
     Observers, IStorage, classIsInstance, isJson, generateUniqueId, 
     ITimingUnit, TimeUnitSeconds, TimeUnitMilliseconds, TimeUnitDays, IObj, 
     IStrategy, StrategyConstructor, StrategyFactory, FoozleIncrementCore, FoozleIncrementVimeo,
-    AbsIncrement, FoozleTimer, AbsObj, EventEmitter, PubSub
+    AbsIncrement, FoozleTimer, AbsObj, ChannelName,
 };
