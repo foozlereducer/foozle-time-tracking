@@ -1,4 +1,4 @@
-import AbsStorage from './AbsStorage.js';
+import AbsStorage from './AbsStorage';
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm
  */
@@ -18,7 +18,6 @@ class FoozleLocalStorage extends AbsStorage {
      * @returns object - a config object literal
      */
     get() {
-        console.log('get()', this.prefix, this.uniqueId);
         const p = localStorage.getItem(this.prefix + this.uniqueId);
         if (null == p) {
             this.init({}, this.uniqueId, this.prefix);
@@ -45,9 +44,7 @@ class FoozleLocalStorage extends AbsStorage {
      */
     setValue(value) {
         if ('undefined' !== typeof value && '' !== this.prefix && '' !== this.uniqueId) {
-            console.log('setValue()', this.prefix, this.uniqueId);
-            const d = JSON.stringify(value);
-            localStorage.setItem(this.prefix + this.uniqueId, d);
+            localStorage.setItem(this.prefix + this.uniqueId, JSON.stringify(value));
         }
         else {
             throw new Error(`You must supply valid valie: ${value}, 

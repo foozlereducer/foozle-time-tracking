@@ -1,10 +1,13 @@
 class AbsIncrement extends EventTarget {
     TimeUnit;
     Obj;
-    constructor(TimeUnit, Obj) {
+    count;
+    i = 0;
+    constructor(TimeUnit, Obj, count = 0) {
         super();
         this.TimeUnit = TimeUnit;
         this.Obj = Obj;
+        this.count = count;
     }
     /**
      * icrement must be overriden
@@ -12,7 +15,7 @@ class AbsIncrement extends EventTarget {
      * @param args - any args
      * @returns object
      */
-    increment(params, ...args) {
+    increment() {
         return {};
     }
 }

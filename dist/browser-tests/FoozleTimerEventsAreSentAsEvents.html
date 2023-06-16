@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Local Storage Event Test</title>
+  <meta name="description" content="A test of a timer throwing a time event and localStorage recording it">
+  <meta name="author" content="Steve Browning">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+ 
+  <style>
+    #status {
+      display:block;
+      height: 50px;
+      width: 100%;
+      background-color: grey;
+    }
+
+    p {
+      padding-top: 15px;
+      padding-left: 20px;
+    }
+
+    .green {color:green}
+    .red {color:red}
+  </style>
+</head>
+
+<body>
+  <h2 class="green">Assert - Timer event interval is accurately thrown</h2>
+  <div id="status"></div>
+  <div id="desc"></div>
+  
+
+
+  <script type="module">
+    const channel = new BroadcastChannel('channel');
+    const reciever = new BroadcastChannel('timerChannel');
+    // get the status dom node
+    const status = document.getElementById('status');
+    const worker = new Worker("./TimerWorker.js", { type: "module" });
+    
+    assertTimerEventsAreSentAsABroadcastEvent();
+    function assertTimerEventsAreSentAsABroadcastEvent() {
+        // Set up the Timer Worker.
+        
+        let count = 0;
+        reciever.onmessage = (event) => {
+          console.log(event)
+          if (event.data == 1) {
+            count++;
+          }
+        }
+        channel.onmessage = (event) => {
+            console.log(event)
+            // set up the status
+            status.innerHTML ='<p></p>';
+            // verify the data
+            status.style.color = 'white'
+           
+              if (count == 10 ) {
+                // style the status box and text to Pass
+                status.style.backgroundColor = 'green'
+              
+                status.innerHTML ='<p>PASS</p>';
+                channel.postMessage( {title:'Assert - Timer Event is passed via the channel and counts to 10', status: 'pass', html:`The timer count reach 10 seconds and was 
+                  passed via the broadcast channel.`});
+                console.log('Pass')
+              } else {
+                // style the status box and text to Fail
+                status.style.backgroundColor = 'red'
+                status.innerHTML ='<p>FAIL</p>';
+                channel.postMessage( {title:'Assert - Timer event is passed and saved in LocalStorage', status: 'fail', html:`<p>The payload <code>{mock: 15}</code> was 
+                  was not passed. It did not store this in localstorage.</p>`});
+                console.log('Fail')
+              }
+          }
+        }
+   
+    
+  </script>
+</body>
+</html>

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <h1>Event-based Browser Testing</h1>
+    <h1>Event-based Browser Feature Testing</h1>
     <p id="testsOutput"></p>
     <div id="iframes"></div>
    
@@ -30,50 +30,83 @@
     .fail {color: red; font-weight:bold;}
    </style> 
   <script>
+    // ensure the DOM has loaded
     document.addEventListener("DOMContentLoaded", function(){
+        // set top level tests array to store the node JS get queries
         let tests = [];
+        // Error handler for nodejs express api call
+        const handleError = function (err) {
+            console.warn(err);
+            return new Response(JSON.stringify({
+                code: 400,
+                message: `${err}`
+            }));
+        };
+
+        /**
+         * Run Test Files - will run the browser test
+         * Async for the JS fetch api
+         * @return void
+         */
         async function runTestFiles() {
-            const response = await fetch("http://127.0.0.1:4567/testingfiles");
-            tests = await response.json();
-            console.log(tests) 
-            const iframes = document.querySelector('#iframes');
-            const testsOutput = document.querySelector('#testsOutput');  
+            // Call the testing files api. If error the node service may 
+            // not be started, so inside the browser-tests dir in terminal 
+            // do [$ npm run start ]
+            const response = await fetch("http://127.0.0.1:4567/testingfiles")
+            .catch( handleError);
+
+            // Check the response is ok othewise shortchange the function by returning
+            if (response.ok) {
+                tests = await response.json();
+            } else {
+                return Promise.reject(response)
+            }
             
+            // Get the dom container where iframes tests should show
+            const iframes = document.querySelector('#iframes');
+            // Get the dom container for the test output messages 
+            const testsOutput = document.querySelector('#testsOutput');  
+            // Loop through the found files and dynamically build iframes for each file
             for(const testData of tests ) {
                 if (iframes) {
-                    
-                        let iframe = document.createElement('iframe')
-                        //iframe.scr = 'http://127.0.0.1:3232/dist/browser-tests/FoozleLocalStorageEventTest.html'
-                        iframe.setAttribute("src", "http://127.0.0.1:3232/dist/browser-tests/FoozleLocalStorageEventTest.html");
-                        iframe.width = '100%';
-                        iframe.height = '150px';
-                        iframe.frameBorder = 0;
-                        //'//`./` + testData;
-                        testsOutput.appendChild(iframe);
-                    
-                        console.log('iframe.src =', iframe.src);
+                    let iframe = document.createElement('iframe')
+                    iframe.setAttribute("src", `http://127.0.0.1:3232/dist/browser-tests/${testData}`);
+                    iframe.width = '100%';
+                    iframe.height = '150px';
+                    iframe.frameBorder = 0;
+                    testsOutput.appendChild(iframe); 
                 }
             }
-            channel.onmessage = (event) => {
-                    let node = document.createElement('p');
-                    if (event.data.status === 'pass') {
-                        node.innerHTML = `- <span class="pass">
-                            <strong>${event.data.title} - PASS!</strong></span> 
-                            ${event.data.html} <br/>`
-                    } else {
-                        node.innerHTML =node.innerHTML =  `<span class="fail"> 
-                            <strong>${event.data.title} FAIL!!!</strong> 
-                            ${event.data.html} </span><br/>`
-                    }
-                    testsOutput.appendChild(node);
-                }
+            
+            
     
         }
-        runTestFiles();
-
+        // setup the broadcast channel
         const channel = new BroadcastChannel('channel')
-        channel.postMessage('getTestDetails');
+        // On Message event - gets this from each test tile (over the broadcast channel)
+        channel.onmessage = (event) => {
+            // cereat a <p> tag
+            let node = document.createElement('p');
+
+            // Pass or fail
+            if (event.data.status === 'pass') {
+                node.innerHTML = `- <span class="pass">
+                    <strong>${event.data.title} - PASS!</strong></span> 
+                    ${event.data.html} <br/>`
+            } else {
+                node.innerHTML =node.innerHTML =  `<span class="fail"> 
+                    <strong>${event.data.title} FAIL!!!</strong> 
+                    ${event.data.html} </span><br/>`
+            }
+            // write the message to the page
+            testsOutput.appendChild(node);
+        }
+
+        // run the test files
+        runTestFiles();
     });
     
   </script>
-</body>
+
+
+

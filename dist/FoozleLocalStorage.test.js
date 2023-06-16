@@ -1,13 +1,10 @@
 import FoozleLocalStorage from './FoozleLocalStorage';
-const mockedBroadcastChannel = BroadcastChannel;
 let FLS = null;
-let channel = new BroadcastChannel('FoozleStorageEvent');
-channel.onmessage = msg => console.log(msg);
 let sut;
 let events = {};
 beforeEach(async () => {
     const page = 'https://testactoapp.com/fun';
-    FLS = new FoozleLocalStorage(channel);
+    FLS = new FoozleLocalStorage();
     const configObj = { mock: 0 };
     FLS.init(configObj, page);
 });
@@ -19,18 +16,18 @@ describe('Foozle Local Storage', () => {
         const prefix = 'steve-';
         const configObj = { mock: 0 };
         const page = 'https://testactoapp.com/fun';
-        const AS = new FoozleLocalStorage(channel);
+        const AS = new FoozleLocalStorage();
         AS.init(configObj, page, prefix);
-        expect(JSON.stringify(await FLS.get())).toBe(`{"mock":0}`);
+        expect(JSON.stringify(FLS.get())).toBe(`{"mock":0}`);
     });
     test("should return 'foozle-https://testactoapp.com/fun'", async () => {
-        expect(JSON.stringify(await FLS.get())).toBe(`{"mock":0}`);
+        expect(JSON.stringify(FLS.get())).toBe(`{"mock":0}`);
     });
     test('should get the initialized storage object {mock:0},increment it {mock:1}', async () => {
-        const obj = await FLS.get();
+        const obj = FLS.get();
         obj.mock++;
         FLS.setValue(obj);
-        expect(JSON.stringify(await FLS.get())).toBe(`{"mock":1}`);
+        expect(JSON.stringify(FLS.get())).toBe(`{"mock":1}`);
     });
     test("should update the storage prefix from 'foozle-' to 'steve-'", () => {
         const currentPrefix = FLS.getPrefix();

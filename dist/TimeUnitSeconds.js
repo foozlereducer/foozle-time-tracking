@@ -1,20 +1,19 @@
+import AbsTimeUnit from "./AbsTimeUnit";
 /**
  * Seconds is a concrete strategy that returns seconds
  */
-class TimeUnitSeconds {
+class TimeUnitSeconds extends AbsTimeUnit {
     timeType;
     incrementUnit;
     baseMiliseconds = 1000;
     constructor() {
+        super();
         this.timeType = 'secondsAsMilliseconds';
         this.incrementUnit = 1;
         this.baseMiliseconds = 1000;
     }
-    getType() {
-        return this.timeType;
-    }
-    getIncrementUnit() {
-        return this.doAction();
+    getMilliseconds() {
+        return this.baseMiliseconds;
     }
     /**
      * Do Action - generic method that is the action for this strategy

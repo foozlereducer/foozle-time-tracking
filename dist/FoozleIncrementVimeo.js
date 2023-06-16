@@ -15,9 +15,10 @@ export class FoozleIncrementVimeo extends AbsIncrement {
      * @returns object - A vimeo Time object Literal
      */
     doAction() {
-        let vimeoTimeObj = this.Obj.doAction();
-        vimeoTimeObj[this.Obj.getType()] = ((vimeoTimeObj.progress % 1) * 1000).toFixed(vimeoTimeObj.timePrecision);
-        return vimeoTimeObj;
+        const objType = this.Obj.getType();
+        let vidTimeObj = { type: "" };
+        vidTimeObj[typeof objType] = ((vidTimeObj.progress % 1) * 1000).toFixed(vidTimeObj.timePrecision);
+        return vidTimeObj;
     }
 }
 //# sourceMappingURL=FoozleIncrementVimeo.js.map

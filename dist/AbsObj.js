@@ -4,6 +4,7 @@ class AbsObj {
     timeKey;
     timePrecision;
     time;
+    milliseconds = 1000;
     /**
      * Constructor - initializes the page object property
      */
@@ -21,7 +22,11 @@ class AbsObj {
      * @returns
      */
     getTime() {
-        return this.obj[this.timeKey];
+        let time = this.obj[this.timeKey];
+        if ('undefined' === typeof time) {
+            time = 0;
+        }
+        return time;
     }
     /**
      * Get the time type
@@ -30,6 +35,22 @@ class AbsObj {
     getType() {
         return this.timeKey;
     }
+    /**
+     * Do Action should be overriden
+     * spread params and args allows flexibility
+     * @returns
+     */
+    doAction() {
+        return;
+    }
+    get() {
+        return {};
+    }
+    /**
+     * Set Obj
+     * must be overriden
+     */
+    setObj(params, ...args) { }
 }
 export default AbsObj;
 //# sourceMappingURL=AbsObj.js.map

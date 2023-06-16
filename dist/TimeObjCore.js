@@ -4,14 +4,18 @@ import AbsObj from './AbsObj';
  */
 class TimeObjCore extends AbsObj {
     /**
-     *
-     * @param key - a key that defines the top reference value of the Page's object literal
-     * @param timerValue  - set the start timerValue for the Page Object
+     * Set Object - it defines the object parameters
+     * @param time - the passed in time in seconds
+     * @param key - the type of time like seconds, millseconds ...
+     * @param timingPrecision - ???
+     * @returns void
      */
     setObj(time = 0, key = 'milliseconds', timingPrecision = 4) {
         this.timeKey = key;
         this.timePrecision = timingPrecision;
         this.time = time;
+    }
+    get() {
         return this.doAction();
     }
     doAction() {

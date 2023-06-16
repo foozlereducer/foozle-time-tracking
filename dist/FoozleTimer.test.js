@@ -1,26 +1,10 @@
-import { TimeUnitSeconds, StrategyFactory, FoozleIncrementCore, TimeObjCore, FoozleTimer, FoozleLocalStorage } from './index';
-import { BroadcastChannel } from 'broadcast-channel';
 let Obj;
 let TimeInSeconds;
 let FCIncrement;
 let SF;
 let FT;
-let FLS;
+let FLS = null;
 beforeEach(() => {
-    SF = new StrategyFactory();
-    Obj = SF.request(TimeObjCore);
-    Obj.setTimePrecision();
-    TimeInSeconds = SF.request(TimeUnitSeconds);
-    FCIncrement = new FoozleIncrementCore(TimeInSeconds, Obj);
-    FCIncrement.addEventListener('foozleInterval', () => {
-        FCIncrement.doAction();
-    });
-    const configObj = { mock: 0 };
-    const page = 'https://testactoapp.com/fun';
-    const bc = new BroadcastChannel('FoozleStorageEvent');
-    FLS = new FoozleLocalStorage(bc);
-    FLS.init(configObj, page);
-    FT = new FoozleTimer();
 });
 afterEach(() => {
     jest.restoreAllMocks();
@@ -33,4 +17,5 @@ describe('The Timer', () => {
         expect(1).toBe(1);
     });
 });
+export {};
 //# sourceMappingURL=FoozleTimer.test.js.map
