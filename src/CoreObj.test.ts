@@ -11,7 +11,8 @@ afterEach(() => {
 
 describe('Create Acto Objs', () => {
   test('should get a default page timing object (in milliseconds)', () => {
-    const obj = CPO.setObj();
+    CPO.setObj();
+    const obj = CPO.get()
     expect(obj).toStrictEqual({ milliseconds: 0 });
   });
 });

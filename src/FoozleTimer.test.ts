@@ -16,25 +16,9 @@ import {
   let FCIncrement:FoozleIncrementCore;
   let SF:StrategyFactory;
   let FT:FoozleTimer;
-  let FLS:FoozleLocalStorage;
- 
+  let FLS: any = null;
   
-  beforeEach(() => {
-      SF = new StrategyFactory();
-      Obj = SF.request(TimeObjCore)
-      Obj.setTimePrecision();
-      TimeInSeconds = SF.request(TimeUnitSeconds)
-      FCIncrement = new FoozleIncrementCore(TimeInSeconds, Obj);
-      FCIncrement.addEventListener('foozleInterval', () => {
-        FCIncrement.doAction();
-      })
-      const configObj = { mock: 0 };
-      const page = 'https://testactoapp.com/fun';
-      const bc = new BroadcastChannel('FoozleStorageEvent');
-      FLS = new FoozleLocalStorage(bc);
-      FLS.init(configObj, page);
-      FT = new FoozleTimer();
-      
+  beforeEach(() => { 
   });
 
   afterEach(() => {

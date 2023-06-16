@@ -1,9 +1,10 @@
 import { IStrategy } from "./index";
+import AbsTimeUnit from "./AbsTimeUnit";
 /**
  * Milliseconds is a concrete strategy value object immutable that returns microseconds
  * It is the smallest time unit that is created by the default time types of Milliseconds, Seconds, Hours, Days
  */
-class TimeUnitMilliseconds implements IStrategy {
+class TimeUnitMilliseconds  extends AbsTimeUnit implements IStrategy {
     timeType:string;
     incrementUnit:number;
 
@@ -11,16 +12,9 @@ class TimeUnitMilliseconds implements IStrategy {
      * This constructor does not take any params as instands of Millisecons should be immutable
      */
     constructor() {
+        super();
         this.timeType = 'milliseconds';
         this.incrementUnit = 1;
-    }
-
-    getType() {
-        return this.timeType;
-    }
-
-    getIncrementUnit() {
-        return this.doAction();
     }
 
     /**

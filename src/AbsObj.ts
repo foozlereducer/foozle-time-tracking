@@ -6,6 +6,7 @@ abstract class AbsObj {
     timeKey:string;
     timePrecision:number;
     time:number;
+    milliseconds = 1000;
 
 
     /**
@@ -15,8 +16,7 @@ abstract class AbsObj {
         this.obj = {};
         this.timeKey = 'milliseconds';
         this.timePrecision = 4;
-        this.time = 0;
-       
+        this.time = 0;   
     }
 
     setTimePrecision(precision=4) {
@@ -28,7 +28,11 @@ abstract class AbsObj {
      * @returns 
      */
     getTime():number {
-        return this.obj[this.timeKey];
+        let time = this.obj[this.timeKey];
+        if( 'undefined' === typeof time ) {
+            time = 0;
+        }
+        return time;
     }
 
     /**
@@ -38,6 +42,23 @@ abstract class AbsObj {
     getType():string {
         return this.timeKey;
     }
+    /**
+     * Do Action should be overriden
+     * spread params and args allows flexibility 
+     * @returns 
+     */
+    doAction():any {
+        return
+    }
+
+    get():object {
+        return {}
+    }
+    /**
+     * Set Obj
+     * must be overriden
+     */
+    setObj(params: any, ...args: any[]) {}
 }
 
 export default AbsObj;

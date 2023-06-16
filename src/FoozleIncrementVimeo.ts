@@ -18,11 +18,15 @@ export class FoozleIncrementVimeo extends AbsIncrement implements IStrategy {
      * @returns object - A vimeo Time object Literal
      */
     doAction() {
-    
-        let vimeoTimeObj = this.Obj.doAction();
-        vimeoTimeObj[this.Obj.getType()] = (
-            (vimeoTimeObj.progress % 1) * 1000).toFixed(vimeoTimeObj.timePrecision);
+        const objType:string = this.Obj.getType();
+        let vidTimeObj:vimeo = {type:""}
+        vidTimeObj[typeof objType] = (
+            (vidTimeObj.progress % 1) * 1000).toFixed(vidTimeObj.timePrecision);
         
-        return vimeoTimeObj;
+        return vidTimeObj;
     }
+}
+
+interface vimeo {
+    [key: string]:any
 }

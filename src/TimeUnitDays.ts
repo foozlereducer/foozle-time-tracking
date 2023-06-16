@@ -1,24 +1,18 @@
 import { IStrategy } from "./index";
+import AbsTimeUnit from "./AbsTimeUnit";
 /**
  * Days is a concrete strategy that returns days
  */
-class TimeUnitDays implements IStrategy {
+class TimeUnitDays extends AbsTimeUnit implements IStrategy {
     timeType:string;
     incrementUnit:number;
     baseMilliseconds:number;
 
     constructor() {
+        super()
         this.timeType = 'daysAsMilliseconds';
         this.incrementUnit = 1;
         this.baseMilliseconds = 86400000;
-    }
-
-    getType() {
-        return this.timeType;
-    }
-
-    getIncrementUnit() {
-        return this.doAction();
     }
 
     /**

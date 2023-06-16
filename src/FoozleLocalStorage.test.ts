@@ -1,11 +1,6 @@
 import FoozleLocalStorage from './FoozleLocalStorage';
 
-const mockedBroadcastChannel = BroadcastChannel as jest.Mocked<typeof BroadcastChannel>;
-
 let FLS: any = null;
-
-let channel = new BroadcastChannel('FoozleStorageEvent')
-channel.onmessage = msg => console.log(msg)
 
 
 let sut:any;
@@ -13,7 +8,7 @@ let events:any = {};
 
 beforeEach( async () => {
   const page = 'https://testactoapp.com/fun';
-  FLS = new FoozleLocalStorage(channel);
+  FLS = new FoozleLocalStorage();
   const configObj = { mock: 0 };
   FLS.init(configObj, page);
 
@@ -28,7 +23,7 @@ describe('Foozle Local Storage',  () => {
     const prefix = 'steve-';
     const configObj = { mock: 0 };
     const page = 'https://testactoapp.com/fun';
-    const AS = new FoozleLocalStorage(channel);
+    const AS = new FoozleLocalStorage();
     AS.init(configObj, page, prefix);
     expect(JSON.stringify(FLS.get())).toBe(`{"mock":0}`);
   });

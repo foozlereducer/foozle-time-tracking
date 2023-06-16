@@ -11,6 +11,7 @@ abstract class AbsStorage extends EventTarget{
    */
   prefix: string;
 
+
   /**
    * Constructor - binds methods and intilizes the properties
    */

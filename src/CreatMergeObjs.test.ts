@@ -24,8 +24,8 @@ describe('Create Acto Objs', () => {
     const vidObj = CVO.doAction();
     const mergedObjs = MO.execute(pageObj, vidObj);
     expect(mergedObjs).toStrictEqual({
-      milliseconds: 50.2,
-      video: { isPlaying: true, volume: 15, progress: 11.0502, videoName: 'abc' },
+      video: { isPlaying: true, volume: 15, videoName: 'abc', progress: 11.0502 },
+      milliseconds: 50.2
     });
   });
 });

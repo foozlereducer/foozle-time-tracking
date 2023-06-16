@@ -5,20 +5,24 @@ class ActoTimer extends EventTarget {
   TM: any;
   timerInterval: any;
   target:EventTarget;
+  channel:BroadcastChannel;
 
 /**
  * Construct
  */
-  constructor() {
+  constructor(channel:any) {
     super();
     this.timerInterval = null;
     this.target = new  EventTarget();
+    this.channel = channel;
   }
 
   /**
    * Time interval callback function
    */
   emit(listener:EventTarget) {
+    this.channel.postMessage(1);
+    console.log('emit')
     return '';
   }
 

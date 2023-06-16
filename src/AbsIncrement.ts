@@ -1,11 +1,17 @@
-abstract class AbsIncrement extends EventTarget {
-    TimeUnit:any;
-    Obj:any;
+import AbsObj from "./AbsObj";
+import { ITimingUnit } from "./ITimingUnit";
 
-    constructor(TimeUnit:any, Obj:any) {
+abstract class AbsIncrement extends EventTarget {
+    TimeUnit:ITimingUnit;
+    Obj:AbsObj;
+    count:number;
+    i:number = 0;
+
+    constructor(TimeUnit:any, Obj:AbsObj, count:number=0) {
         super();
         this.TimeUnit = TimeUnit;
         this.Obj = Obj;
+        this.count = count;
     }
 
     /**
@@ -14,7 +20,7 @@ abstract class AbsIncrement extends EventTarget {
      * @param args - any args
      * @returns object
      */
-    increment(params: any, ...args: any[]): object {
+    increment(): object {
        return {};
     }
 }

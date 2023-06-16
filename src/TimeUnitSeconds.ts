@@ -1,24 +1,22 @@
 import { IStrategy } from "./index";
+import AbsTimeUnit from "./AbsTimeUnit";
 /**
  * Seconds is a concrete strategy that returns seconds
  */
-class TimeUnitSeconds implements IStrategy {
+class TimeUnitSeconds extends AbsTimeUnit implements IStrategy {
     timeType:string;
     incrementUnit:number;
     baseMiliseconds = 1000;
 
     constructor() {
+        super();
         this.timeType = 'secondsAsMilliseconds';
         this.incrementUnit = 1;
         this.baseMiliseconds = 1000;
     }
 
-    getType() {
-        return this.timeType;
-    }
-
-    getIncrementUnit() {
-        return this.doAction();
+    getMilliseconds():number {
+      return this.baseMiliseconds;
     }
 
     /**

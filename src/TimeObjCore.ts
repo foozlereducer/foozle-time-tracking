@@ -7,15 +7,20 @@ import AbsObj from './AbsObj';
 class TimeObjCore extends AbsObj implements IObj, IStrategy {
  
   /**
-   *
-   * @param key - a key that defines the top reference value of the Page's object literal
-   * @param timerValue  - set the start timerValue for the Page Object
+   * Set Object - it defines the object parameters 
+   * @param time - the passed in time in seconds
+   * @param key - the type of time like seconds, millseconds ...
+   * @param timingPrecision - ???
+   * @returns void
    */
-  setObj(time = 0, key = 'milliseconds', timingPrecision = 4): object {
+  setObj(time = 0, key = 'milliseconds', timingPrecision = 4): void {
     this.timeKey = key;
     this.timePrecision = timingPrecision;
     this.time = time;
-    return this.doAction();
+  }
+
+  get():object {
+   return this.doAction();
   }
 
   doAction() {
