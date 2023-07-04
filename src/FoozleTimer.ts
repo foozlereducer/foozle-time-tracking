@@ -1,34 +1,23 @@
+import { BroadcastService } from "./BroadcastService";
 
-
-class ActoTimer extends EventTarget {
-  storage: any;
-  TM: any;
-  timerInterval: any;
-  target:EventTarget;
-  channel:BroadcastChannel;
+class FoozleTimer {
+  timerInterval:any;
+  broadcastService:BroadcastService;
 
 /**
  * Construct
  */
-  constructor(channel:any) {
-    super();
+  constructor(broadcastService:BroadcastService) {
     this.timerInterval = null;
-    this.target = new  EventTarget();
-    this.channel = channel;
-  }
-
-  /**
-   * Time interval callback function
-   */
-  emit(listener:EventTarget) {
-    this.channel.postMessage(1);
-    console.log('emit')
-    return '';
+    this.broadcastService = broadcastService;
   }
 
   startTimer(intervalTime = 1000) {
-    this.timerInterval = setInterval(this.emit, intervalTime);
-  }
+    const self:any = this;
+    this.timerInterval = setInterval(function() {
+      self.broadcastService.postMessage({countBy:1, status:"pass", datetime:new Date()})
+    }, intervalTime);
+}
 
   stopTimer() {
     clearInterval(this.timerInterval);
@@ -39,4 +28,4 @@ class ActoTimer extends EventTarget {
   }
 }
 
-export default ActoTimer;
+export default FoozleTimer;

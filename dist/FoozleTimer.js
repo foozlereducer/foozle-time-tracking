@@ -1,28 +1,18 @@
-class ActoTimer extends EventTarget {
-    storage;
-    TM;
+class FoozleTimer {
     timerInterval;
-    target;
-    channel;
+    broadcastService;
     /**
      * Construct
      */
-    constructor(channel) {
-        super();
+    constructor(broadcastService) {
         this.timerInterval = null;
-        this.target = new EventTarget();
-        this.channel = channel;
-    }
-    /**
-     * Time interval callback function
-     */
-    emit(listener) {
-        this.channel.postMessage(1);
-        console.log('emit');
-        return '';
+        this.broadcastService = broadcastService;
     }
     startTimer(intervalTime = 1000) {
-        this.timerInterval = setInterval(this.emit, intervalTime);
+        const self = this;
+        this.timerInterval = setInterval(function () {
+            self.broadcastService.postMessage({ countBy: 1, status: "pass", datetime: new Date() });
+        }, intervalTime);
     }
     stopTimer() {
         clearInterval(this.timerInterval);
@@ -31,5 +21,5 @@ class ActoTimer extends EventTarget {
         return this.timerInterval;
     }
 }
-export default ActoTimer;
+export default FoozleTimer;
 //# sourceMappingURL=FoozleTimer.js.map

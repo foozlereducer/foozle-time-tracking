@@ -1,0 +1,19 @@
+#status {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: grey;
+  }
+
+  p {
+    padding-top: 15px;
+    padding-left: 20px;
+  }
+
+  .green {
+    color: green
+  }
+
+  .red {
+    color: red
+  }

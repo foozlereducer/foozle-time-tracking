@@ -53,13 +53,15 @@
             // not be started, so inside the browser-tests dir in terminal 
             // do [$ npm run start ]
             const response = await fetch("http://127.0.0.1:4567/testingfiles")
-            .catch( handleError);
+            
 
             // Check the response is ok othewise shortchange the function by returning
-            if (response.ok) {
+            if (response.status >= 200 && response.status <= 299) {
                 tests = await response.json();
             } else {
-                return Promise.reject(response)
+                throw new Error(`status: ${response.status}, error: ${response.statusText}
+                 corrective steps: start the api using <code>npm run start</code> 
+                 within the root of the browser event tests`)
             }
             
             // Get the dom container where iframes tests should show
@@ -82,9 +84,9 @@
     
         }
         // setup the broadcast channel
-        const channel = new BroadcastChannel('channel')
+        const index = new BroadcastChannel('index')
         // On Message event - gets this from each test tile (over the broadcast channel)
-        channel.onmessage = (event) => {
+        index.onmessage = (event) => {
             // cereat a <p> tag
             let node = document.createElement('p');
 

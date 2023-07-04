@@ -1,0 +1,111 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Timer Accuracy Test</title>
+    <meta name="description" content="Measure that timer runs for 30 seconds accurately">
+    <meta name="author" content="Steve Browning">
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+</head>
+
+<body>
+    <h2 class="green">Assert - Timer runs 30 seconds - measured by Date Time</h2>
+    <div id="status"></div>
+    <div id="desc"></div>
+
+    <script type="module">
+        const channel = new BroadcastChannel('channel2');
+        const controls = new BroadcastChannel('controls2');
+        const index = new BroadcastChannel('index')
+        // get the status dom node
+        const status = document.getElementById('status');
+        const worker = new Worker("./TimerWorker2.js", { type: "module" });
+
+        assertTimerAccuratelyTracks30seconds();
+        const bar = document.querySelector('#status')
+        bar.style.width = 0;
+        function pass(assertionSent, actualTime = null) {
+            // set up the status
+            status.innerHTML = '<p></p>';
+            // verify the data
+            status.style.color = 'white'
+            // style the status box and text to Pass
+            status.style.backgroundColor = 'green'
+            bar.innerHTML = `<p>PASS  - actual time is ${actualTime} seonds.milliseconds</p>`
+
+            index.postMessage({
+                title: 'Assert - Timer accurately times 30 seconds',
+                status: 'pass', html: `The timer count reached 30 seconds and matches 
+                                            Date/Time in seconds.`});
+            console.log('Pass')
+
+        }
+        function fail(assertionSent) {
+            // style the status box and text to Fail
+            status.style.backgroundColor = 'red'
+            status.innerHTML = '<p>FAIL</p>';
+            index.postMessage({
+                title: 'Assert - Timer accurately times 30 seconds',
+                status: 'fail',
+                html: `<p>The timer did not track 30 seconds accurately</p>`
+            });
+            console.log('Fail')
+        }
+        function getSeconds(startDatetime, endDatetime) {
+            return parseInt((endDatetime-startDatetime)/1000);
+        }
+        
+        function assertTimerAccuratelyTracks30seconds() {
+            // Set up the Timer Worker.
+
+            let count = 0;
+            let assertionSent = 0;
+            let startDatetime = null;
+            channel.onmessage = (event) => {
+
+                if (event.data.countBy) {
+                    if (event.data.countBy == 1) {
+                        if( !startDatetime ) {
+                            startDatetime = new Date(event.data.datetime);
+                        }
+                        count++;
+                        if (count == 30) {
+                            controls.postMessage({msg:'kill-timer'})
+                        }
+                        if (1 == count) {
+                            console.log(event)
+                        }
+                        // don't calculate based on 10% for each bar increment, 
+                        // instead use 9.1 as the count actually goes to 11 and 
+                        // makes the bar overflow.
+                        bar.style.width = count * 3.33 + '%';  
+                    }
+                } else if (event.data.count) {
+                    const c = event.data.count;
+                    const time = parseInt(c)
+                    if(30 == time) {
+                        pass(1, c)
+                    } else {
+                        fail(1)
+                    }
+                }
+
+                if (count < 30) {
+                    bar.style.color = 'white';
+                    bar.innerHTML = `<p>Counting... ${count} seconds elapsed</p>`
+                }
+
+
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

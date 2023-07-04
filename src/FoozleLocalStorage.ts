@@ -1,5 +1,5 @@
 import {ILooseObject, IStorage} from './index';
-import AbsStorage from './AbsStorage';
+import AbsStorage from './AbsStorage.js';
 
 /**
  * Foozle Local Storage - for managing the timing and configuration that happen on each page of the ACTO platorm

@@ -10,23 +10,6 @@
   <meta name="author" content="Steve Browning">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
- 
-  <style>
-    #status {
-      display:block;
-      height: 50px;
-      width: 100%;
-      background-color: grey;
-    }
-
-    p {
-      padding-top: 15px;
-      padding-left: 20px;
-    }
-
-    .green {color:green}
-    .red {color:red}
-  </style>
 </head>
 
 <body>
@@ -40,14 +23,14 @@
     import FoozleLocalStorage from "../FoozleLocalStorage.js";
     const fileName = location.href.split("/").slice(-1);
     // set the broadcast
-    const channel = new BroadcastChannel('channel');
+    const index = new BroadcastChannel('index');
     // get the status dom node
     const status = document.getElementById('status');
     // Set up the Local Storage object.
     const FLS = new FoozleLocalStorage();
     const configObj = { mock: 0 };
-    const page = 'https://testactoapp.com/fun';
-    FLS.init(configObj, page);
+    const uniqueId = 'https://testactoapp.com/fun';
+    FLS.init(configObj, uniqueId);
 
     assertLocalStorageEventIsPassedFromTimer();
     function assertLocalStorageEventIsPassedFromTimer() {
@@ -66,7 +49,7 @@
             status.style.backgroundColor = 'green'
           
             status.innerHTML ='<p>PASS</p>';
-            channel.postMessage( {title:'Assert - Timer event is passed and saved in LocalStorage', status: 'pass', html:`The payload <code>{mock: 15}</code> was 
+            index.postMessage( {title:'Assert - Timer event is passed and saved in LocalStorage', status: 'pass', html:`The payload <code>{mock: 15}</code> was 
               passed by a mocked increment strategy over a  broadcast channel. 
               It did store this in localstorage.`});
             console.log('Pass')
@@ -74,7 +57,8 @@
             // style the status box and text to Fail
             status.style.backgroundColor = 'red'
             status.innerHTML ='<p>FAIL</p>';
-            channel.postMessage( {title:'Assert - Timer event is passed and saved in LocalStorage', status: 'fail', html:`<p>The payload <code>{mock: 15}</code> was 
+            index.postMessage( {title:`Assert - Timer event was not passed and did not 
+            saved in LocalStorage`, status: 'fail', html:`<p>The payload <code>{mock: 15}</code> was 
               was not passed. It did not store this in localstorage.</p>`});
             console.log('Fail')
           }
